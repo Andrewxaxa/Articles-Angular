@@ -1,0 +1,46 @@
+:host {
+  background: var(--mat-sys-primary-container);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.header-icon {
+  color: var(--mat-sys-primary);
+
+  &:hover {
+    background: color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
+  }
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.header .header-item {
+  color: var(--mat-sys-primary);
+  margin-right: 6px;
+  user-select: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 64px;
+  border: none;
+  outline: none;
+  line-height: inherit;
+  overflow: visible;
+  vertical-align: middle;
+  background: rgba(0, 0, 0, 0);
+
+  &.active,
+  &:hover {
+    background: color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
+  }
+}

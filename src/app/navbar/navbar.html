@@ -1,0 +1,20 @@
+<nav class="header">
+  <a class="header-item" matButton="tonal" routerLink="">
+    <mat-icon
+      class="header-icon"
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="home"
+    ></mat-icon
+    >Home</a
+  >
+  @for(route of routes; track $index) {
+  <a
+    class="header-item"
+    matButton="tonal"
+    [routerLink]="route.path"
+    routerLinkActive="active"
+    >{{ route.name }}</a
+  >
+  }
+</nav>

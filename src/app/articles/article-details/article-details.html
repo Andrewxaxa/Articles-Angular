@@ -1,0 +1,44 @@
+<div class="article-container">
+  <mat-card class="article-card">
+    <mat-card-header>
+      <mat-card-title>{{ article().title }}</mat-card-title>
+      <mat-card-subtitle>
+        Created at: {{ article().createdAt | date:'short' }}
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        Last update: {{ article().updatedAt | date:'short' }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <img
+      mat-card-image
+      src="https://material.angular.dev/assets/img/examples/shiba2.jpg"
+      alt="Article Image"
+    />
+
+    <mat-card-content>
+      <p class="summary">{{ article().summary }}</p>
+      <div class="content" [innerHTML]="article().content"></div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button
+        mat-icon-button
+        (click)="edit()"
+        aria-label="Edit article"
+        matTooltip="Edit article"
+      >
+        <mat-icon class="edit-icon">edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        (click)="delete()"
+        aria-label="Delete article"
+        matTooltip="Delete article"
+      >
+        <mat-icon class="delete-icon">delete</mat-icon>
+      </button>
+      <span class="spacer"></span>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-not-found',
-  imports: [MatIcon, MatButton],
+  imports: [MatIconModule, MatButtonModule],
   templateUrl: './not-found.html',
   styleUrl: './not-found.scss',
 })

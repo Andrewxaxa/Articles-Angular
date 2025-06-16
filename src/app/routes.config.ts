@@ -1,6 +1,7 @@
 interface IRoutesConfig {
   HOME: IRouteConfig;
   ARTICLES: IRouteConfig;
+  ARTICLES_DETAILS: IRouteConfig;
 }
 
 interface IRouteConfig {
@@ -19,5 +20,10 @@ export const ROUTES_CONFIG: IRoutesConfig = {
     name: 'Articles',
     path: 'articles',
     title: 'Articles',
+  },
+  ARTICLES_DETAILS: {
+    name: 'Article details',
+    path: 'articles/:id',
+    title: 'Article details',
   },
 };

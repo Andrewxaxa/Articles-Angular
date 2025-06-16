@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { ROUTES_CONFIG } from '../routes.config';
 import { RouterModule } from '@angular/router';
 
@@ -11,7 +11,7 @@ interface INavRoute {
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterModule, MatButton, MatIcon],
+  imports: [RouterModule, MatButtonModule, MatIconModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })

@@ -2,7 +2,7 @@
 <app-article-details
   [article]="article"
   (articleEditClicked)="editArticle()"
-  (articleDeleteClicked)="deleteArticle()"
+  (articleDeleteClicked)="onDelete()"
 ></app-article-details>
 } @else {
 <app-empty-page text="No articles found"></app-empty-page>

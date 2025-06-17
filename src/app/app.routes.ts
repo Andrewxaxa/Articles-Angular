@@ -11,9 +11,10 @@ export const routes: Routes = [
     title: ROUTES_CONFIG.HOME.title,
   },
   {
-    path: ROUTES_CONFIG.ARTICLES.path,
-    component: ArticlesPage,
-    title: ROUTES_CONFIG.ARTICLES.title,
+    path: ROUTES_CONFIG.ADD_ARTICLE.path,
+    loadComponent: () =>
+      import('./articles/add-article/add-article').then((m) => m.AddArticle),
+    title: ROUTES_CONFIG.ADD_ARTICLE.title,
   },
   {
     path: ROUTES_CONFIG.ARTICLES_DETAILS.path,
@@ -22,6 +23,11 @@ export const routes: Routes = [
         (m) => m.ArticleDetailsPage
       ),
     title: ROUTES_CONFIG.ARTICLES_DETAILS.title,
+  },
+  {
+    path: ROUTES_CONFIG.ARTICLES.path,
+    component: ArticlesPage,
+    title: ROUTES_CONFIG.ARTICLES.title,
   },
   { path: '**', component: NotFound },
 ];

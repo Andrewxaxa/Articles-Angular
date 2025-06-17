@@ -1,0 +1,24 @@
+<form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="form-wrapper">
+  <app-input [control]="articleForm.controls['title']"></app-input>
+
+  <app-textarea
+    [control]="articleForm.controls['summary']"
+    [rows]="2"
+  ></app-textarea>
+
+  <app-textarea
+    [control]="articleForm.controls['content']"
+    [rows]="10"
+  ></app-textarea>
+
+  <div class="actions">
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="articleForm.invalid"
+    >
+      Add article
+    </button>
+  </div>
+</form>

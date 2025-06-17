@@ -14,7 +14,7 @@ import { Empty } from '../../ui/empty/empty';
   styleUrl: './articles-page.scss',
 })
 export class ArticlesPage {
-  firestore: Firestore = inject(Firestore);
+  private firestore: Firestore = inject(Firestore);
   articles$: Observable<IArticle[]>;
 
   constructor() {

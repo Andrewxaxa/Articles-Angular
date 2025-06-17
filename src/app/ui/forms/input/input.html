@@ -1,0 +1,9 @@
+<mat-form-field class="form-field">
+  <mat-label>Title</mat-label>
+  <input matInput [formControl]="control()" required />
+  @if (control().hasError('required')) {
+  <mat-error>{{requiredMessage('title')}}</mat-error>
+  } @if (control().hasError('minlength')) {
+  <mat-error>{{tooShortMessage('title')}}</mat-error>
+  }
+</mat-form-field>

@@ -21,5 +21,9 @@ export class Navbar {
       name: ROUTES_CONFIG.ARTICLES.name,
       path: ROUTES_CONFIG.ARTICLES.path,
     },
+    {
+      name: ROUTES_CONFIG.ADD_ARTICLE.name,
+      path: ROUTES_CONFIG.ADD_ARTICLE.path,
+    },
   ];
 }

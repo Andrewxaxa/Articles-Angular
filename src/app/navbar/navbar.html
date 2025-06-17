@@ -4,6 +4,7 @@
     matButton="tonal"
     routerLink=""
     routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
   >
     <mat-icon
       class="header-icon"
@@ -19,6 +20,7 @@
     matButton="tonal"
     [routerLink]="route.path"
     routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
     >{{ route.name }}</a
   >
   }

@@ -1,0 +1,14 @@
+<mat-form-field class="form-field">
+  <mat-label>Summary</mat-label>
+  <textarea
+    matInput
+    [formControl]="control()"
+    [rows]="rows()"
+    required
+  ></textarea>
+  @if (control().hasError('required')) {
+  <mat-error>{{requiredMessage('summary')}}</mat-error>
+  } @if (control().hasError('minlength')) {
+  <mat-error>{{tooShortMessage('summary')}}</mat-error>
+  }
+</mat-form-field>

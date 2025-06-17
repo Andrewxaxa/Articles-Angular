@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,11 +21,6 @@ import { DatePipe } from '@angular/common';
 export class ArticleDetails {
   article = input.required<IArticle>();
 
-  edit() {
-    // do zaimplementowania
-  }
-
-  delete() {
-    // do zaimplementowania
-  }
+  articleEditClicked = output();
+  articleDeleteClicked = output();
 }

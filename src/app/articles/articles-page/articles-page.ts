@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 import { IArticle } from '../articles.interface';
 import { articleConverter } from '../articles.converter';
 import { ArticlesList } from '../articles-list/articles-list';
-import { Empty } from '../../ui/empty/empty';
+import { EmptyPage } from '../../ui/empty-page/empty-page-page';
 
 @Component({
   selector: 'app-articles',
-  imports: [AsyncPipe, ArticlesList, Empty],
+  imports: [AsyncPipe, ArticlesList, EmptyPage],
   templateUrl: './articles-page.html',
   styleUrl: './articles-page.scss',
 })

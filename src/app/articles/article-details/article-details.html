@@ -24,7 +24,7 @@
     <mat-card-actions align="end">
       <button
         mat-icon-button
-        (click)="edit()"
+        (click)="articleEditClicked.emit()"
         aria-label="Edit article"
         matTooltip="Edit article"
       >
@@ -32,7 +32,7 @@
       </button>
       <button
         mat-icon-button
-        (click)="delete()"
+        (click)="articleDeleteClicked.emit()"
         aria-label="Delete article"
         matTooltip="Delete article"
       >

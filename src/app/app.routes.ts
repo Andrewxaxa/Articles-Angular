@@ -25,6 +25,14 @@ export const routes: Routes = [
     title: ROUTES_CONFIG.ARTICLES_DETAILS.title,
   },
   {
+    path: ROUTES_CONFIG.EDIT_ARTICLE.path,
+    loadComponent: () =>
+      import('./articles/edit-article-page/edit-article-page').then(
+        (m) => m.EditArticlePage
+      ),
+    title: ROUTES_CONFIG.EDIT_ARTICLE.title,
+  },
+  {
     path: ROUTES_CONFIG.ARTICLES.path,
     component: ArticlesPage,
     title: ROUTES_CONFIG.ARTICLES.title,

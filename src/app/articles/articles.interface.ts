@@ -8,3 +8,10 @@ export interface IArticle {
 }
 
 export type INewArticle = Omit<IArticle, 'id'>;
+
+export interface IUpdateArticle {
+  title: string;
+  content: string;
+  summary: string;
+  updatedAt: Date;
+}

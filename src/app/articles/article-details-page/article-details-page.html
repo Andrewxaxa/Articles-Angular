@@ -1,5 +1,9 @@
 @if (article$ | async; as article) {
-<app-article-details [article]="article"></app-article-details>
+<app-article-details
+  [article]="article"
+  (articleEditClicked)="editArticle()"
+  (articleDeleteClicked)="deleteArticle()"
+></app-article-details>
 } @else {
-<app-empty text="No articles found"></app-empty>
+<app-empty-page text="No articles found"></app-empty-page>
 }

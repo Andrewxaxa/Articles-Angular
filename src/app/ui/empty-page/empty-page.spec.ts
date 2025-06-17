@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Empty } from './empty';
+import { EmptyPage } from './empty-page-page';
 
 describe('Empty', () => {
-  let component: Empty;
-  let fixture: ComponentFixture<Empty>;
+  let component: EmptyPage;
+  let fixture: ComponentFixture<EmptyPage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Empty]
-    })
-    .compileComponents();
+      imports: [EmptyPage],
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(Empty);
+    fixture = TestBed.createComponent(EmptyPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

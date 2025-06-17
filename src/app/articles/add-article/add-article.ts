@@ -1,11 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  GENERAL_ERROR_MESSAGE,
-  REQUIRED_MESSAGE,
-  TOO_SHORT_MESSAGE,
-} from '../../util/messages';
+import { GENERAL_ERROR_MESSAGE } from '../../util/messages';
 import { Input } from '../../ui/forms/input/input';
 import { Textarea } from '../../ui/forms/textarea/textarea';
 import { addDoc, collection, Firestore } from '@angular/fire/firestore';
@@ -26,9 +22,6 @@ export class AddArticle {
   private firestore: Firestore = inject(Firestore);
   private toastr: ToastrService = inject(ToastrService);
   private router: Router = inject(Router);
-
-  requiredMessage = (field: string): string => REQUIRED_MESSAGE(field);
-  tooShortMessage = (field: string): string => TOO_SHORT_MESSAGE(field);
 
   articleForm = this.formBuilder.group({
     title: ['', [Validators.required, Validators.minLength(5)]],

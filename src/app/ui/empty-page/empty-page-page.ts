@@ -1,11 +1,11 @@
 import { Component, input } from '@angular/core';
 
 @Component({
-  selector: 'app-empty',
+  selector: 'app-empty-page',
   imports: [],
-  templateUrl: './empty.html',
-  styleUrl: './empty.scss',
+  templateUrl: './empty-page.html',
+  styleUrl: './empty-page.scss',
 })
-export class Empty {
+export class EmptyPage {
   text = input('There are no items to display');
 }

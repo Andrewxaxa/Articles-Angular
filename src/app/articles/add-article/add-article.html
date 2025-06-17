@@ -3,12 +3,12 @@
 
   <app-textarea
     [control]="articleForm.controls['summary']"
-    [rows]="2"
+    [minRows]="2"
   ></app-textarea>
 
   <app-textarea
     [control]="articleForm.controls['content']"
-    [rows]="10"
+    [minRows]="20"
   ></app-textarea>
 
   <div class="actions">

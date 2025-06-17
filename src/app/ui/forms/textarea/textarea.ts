@@ -12,7 +12,7 @@ import { REQUIRED_MESSAGE, TOO_SHORT_MESSAGE } from '../../../util/messages';
 })
 export class Textarea {
   control = input.required<FormControl>();
-  rows = input(5);
+  minRows = input(3);
 
   requiredMessage = (field: string): string => REQUIRED_MESSAGE(field);
   tooShortMessage = (field: string): string => TOO_SHORT_MESSAGE(field);

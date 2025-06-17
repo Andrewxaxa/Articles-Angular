@@ -6,3 +6,5 @@ export interface IArticle {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type INewArticle = Omit<IArticle, 'id'>;

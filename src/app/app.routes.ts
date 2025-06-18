@@ -3,12 +3,23 @@ import { Home } from './home/home';
 import { ArticlesPage } from './articles/articles-page/articles-page';
 import { NotFound } from './not-found/not-found';
 import { ROUTES_CONFIG } from './routes.config';
+import { Login } from './auth/login/login';
 
 export const routes: Routes = [
   {
     path: ROUTES_CONFIG.HOME.path,
     component: Home,
     title: ROUTES_CONFIG.HOME.title,
+  },
+  {
+    path: ROUTES_CONFIG.LOGIN.path,
+    component: Login,
+    title: ROUTES_CONFIG.LOGIN.title,
+  },
+  {
+    path: ROUTES_CONFIG.SIGNUP.path,
+    loadComponent: () => import('./auth/signup/signup').then((m) => m.Signup),
+    title: ROUTES_CONFIG.SIGNUP.title,
   },
   {
     path: ROUTES_CONFIG.ADD_ARTICLE.path,

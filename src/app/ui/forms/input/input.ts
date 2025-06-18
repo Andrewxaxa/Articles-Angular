@@ -11,7 +11,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './input.scss',
 })
 export class Input {
+  name = input.required<string>();
   control = input.required<FormControl>();
+  type = input('text');
 
   requiredMessage = (field: string): string => REQUIRED_MESSAGE(field);
   tooShortMessage = (field: string): string => TOO_SHORT_MESSAGE(field);

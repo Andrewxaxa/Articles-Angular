@@ -24,4 +24,50 @@
     >{{ route.name }}</a
   >
   }
+
+  <span class="spacer"></span>
+
+  @if(!userDataLoading()) { @if (user()) {
+  <button
+    mat-icon-button
+    (click)="logoutClicked.emit()"
+    aria-label="Log out"
+    matTooltip="Log out"
+  >
+    <mat-icon class="delete-icon">logout</mat-icon>
+  </button>
+  } @else {
+  <a
+    class="action-button"
+    matButton="outlined"
+    [routerLink]="routesConfig.LOGIN.path"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+  >
+    <mat-icon
+      class="header-icon"
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="login"
+    ></mat-icon
+    >{{ routesConfig.LOGIN.name }}</a
+  >
+  <a
+    class="action-button"
+    matButton="outlined"
+    [routerLink]="routesConfig.SIGNUP.path"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}"
+  >
+    <mat-icon
+      class="header-icon"
+      aria-hidden="false"
+      aria-label="Example home icon"
+      fontIcon="person_add"
+    ></mat-icon
+    >{{ routesConfig.SIGNUP.name }}</a
+  >
+  } } @else {
+  <mat-spinner diameter="30"></mat-spinner>
+  }
 </nav>

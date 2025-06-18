@@ -1,4 +1,8 @@
-<app-navbar></app-navbar>
+<app-navbar
+  [user]="user"
+  [userDataLoading]="userDataLoading()"
+  (logoutClicked)="logout()"
+></app-navbar>
 
 <div class="app-content">
   <router-outlet />

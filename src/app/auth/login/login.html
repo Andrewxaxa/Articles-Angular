@@ -1,0 +1,23 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-wrapper">
+  <app-input
+    [control]="loginForm.controls['email']"
+    name="email"
+    type="email"
+  ></app-input>
+  <app-input
+    [control]="loginForm.controls['password']"
+    name="password"
+    type="password"
+  ></app-input>
+
+  <div class="actions">
+    <button
+      matButton="filled"
+      color="primary"
+      type="submit"
+      [disabled]="loginForm.invalid"
+    >
+      Login
+    </button>
+  </div>
+</form>

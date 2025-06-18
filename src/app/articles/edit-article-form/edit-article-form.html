@@ -1,14 +1,16 @@
 <form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="form-wrapper">
-  <app-input [control]="articleForm.controls['title']"></app-input>
+  <app-input [control]="articleForm.controls['title']" name="title"></app-input>
 
   <app-textarea
     [control]="articleForm.controls['summary']"
     [minRows]="2"
+    name="summary"
   ></app-textarea>
 
   <app-textarea
     [control]="articleForm.controls['content']"
     [minRows]="20"
+    name="content"
   ></app-textarea>
 
   <div class="actions">

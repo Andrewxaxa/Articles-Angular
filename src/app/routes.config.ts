@@ -1,5 +1,7 @@
 interface IRoutesConfig {
   HOME: IRouteConfig;
+  LOGIN: IRouteConfig;
+  SIGNUP: IRouteConfig;
   ARTICLES: IRouteConfig;
   ARTICLES_DETAILS: IRouteConfig;
   ADD_ARTICLE: IRouteConfig;
@@ -17,6 +19,16 @@ export const ROUTES_CONFIG: IRoutesConfig = {
     name: 'Home',
     path: '',
     title: 'Home Page',
+  },
+  LOGIN: {
+    name: 'Log in',
+    path: 'login',
+    title: 'Log in',
+  },
+  SIGNUP: {
+    name: 'Sign up',
+    path: 'signup',
+    title: 'Sign up',
   },
   ARTICLES: {
     name: 'Articles',

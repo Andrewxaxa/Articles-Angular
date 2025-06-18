@@ -1,15 +1,14 @@
 <mat-form-field class="form-field">
-  <mat-label>Summary</mat-label>
+  <mat-label>{{ name() }}</mat-label>
   <textarea
     matInput
     [formControl]="control()"
     cdkTextareaAutosize
     [cdkAutosizeMinRows]="minRows()"
-    required
   ></textarea>
   @if (control().hasError('required')) {
-  <mat-error>{{requiredMessage('summary')}}</mat-error>
+  <mat-error>{{requiredMessage(name())}}</mat-error>
   } @if (control().hasError('minlength')) {
-  <mat-error>{{tooShortMessage('summary')}}</mat-error>
+  <mat-error>{{tooShortMessage(name())}}</mat-error>
   }
 </mat-form-field>

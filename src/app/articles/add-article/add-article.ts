@@ -21,8 +21,8 @@ export class AddArticle {
   private articlesFirebaseService: ArticlesFirebaseService = inject(
     ArticlesFirebaseService
   );
-  private toastr: ToastrService = inject(ToastrService);
-  private router: Router = inject(Router);
+  private toastr = inject(ToastrService);
+  private router = inject(Router);
 
   articleForm = this.formBuilder.group({
     title: ['', [Validators.required, Validators.minLength(5)]],

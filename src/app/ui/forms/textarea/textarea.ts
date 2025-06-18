@@ -11,6 +11,7 @@ import { REQUIRED_MESSAGE, TOO_SHORT_MESSAGE } from '../../../util/messages';
   styleUrl: './textarea.scss',
 })
 export class Textarea {
+  name = input.required<string>();
   control = input.required<FormControl>();
   minRows = input(3);
 

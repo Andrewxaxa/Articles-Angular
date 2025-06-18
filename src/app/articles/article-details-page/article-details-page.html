@@ -1,9 +1,11 @@
-@if (article$ | async; as article) {
+@if (isLoading()) {
+<app-loading-page />
+} @else { @if (article(); as article) {
 <app-article-details
   [article]="article"
   (articleEditClicked)="editArticle()"
   (articleDeleteClicked)="onDelete()"
 ></app-article-details>
 } @else {
-<app-empty-page text="No articles found"></app-empty-page>
-}
+<app-empty-page text="Could not find this article" />
+} }

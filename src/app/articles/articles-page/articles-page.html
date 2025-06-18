@@ -1,5 +1,7 @@
-@if (articles$ | async; as articles) {
-<app-articles-list [articles]="articles"></app-articles-list>
+@if (isLoading()) {
+<app-loading-page />
+} @else if (articles().length > 0) {
+<app-articles-list [articles]="articles()" />
 } @else {
-<app-empty-page text="No articles found"></app-empty-page>
+<app-empty-page text="No articles found" />
 }

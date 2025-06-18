@@ -1,19 +1,9 @@
-import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import {
-  deleteDoc,
-  doc,
-  docData,
-  DocumentData,
-  DocumentReference,
-  Firestore,
-} from '@angular/fire/firestore';
+import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { IArticle } from '../articles.interface';
 import { EmptyPage } from '../../ui/empty-page/empty-page-page';
 import { ArticleDetails } from '../article-details/article-details';
-import { articleConverter } from '../articles.converter';
 import { ToastrService } from 'ngx-toastr';
 import { GENERAL_ERROR_MESSAGE } from '../../util/messages';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,32 +11,34 @@ import {
   ConfirmDialog,
   ConfirmDialogData,
 } from '../../ui/confirm-dialog/confirm-dialog';
+import { ArticlesFirebaseService } from '../articles-firebase-service';
+import { LoadingPage } from '../../ui/loading-page/loading-page';
 
 @Component({
   selector: 'app-article-details-page',
-  imports: [ArticleDetails, AsyncPipe, EmptyPage],
+  imports: [ArticleDetails, EmptyPage, LoadingPage],
   templateUrl: './article-details-page.html',
   styleUrl: './article-details-page.scss',
 })
-export class ArticleDetailsPage {
+export class ArticleDetailsPage implements OnDestroy {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private firestore = inject(Firestore);
+  private articlesFirebaseService = inject(ArticlesFirebaseService);
   private toastr = inject(ToastrService);
   private dialog = inject(MatDialog);
-
-  article$: Observable<IArticle | undefined>;
-  articleRef: DocumentReference<IArticle, DocumentData>;
+  private destroy$ = new Subject<void>();
+  readonly article = signal<IArticle | undefined>(undefined);
+  readonly articleId = this.route.snapshot.paramMap.get('id')!;
+  isLoading = signal(true);
 
   constructor() {
-    const articleId = this.route.snapshot.paramMap.get('id')!;
-    this.articleRef = doc(
-      this.firestore,
-      `articles/${articleId}`
-    ).withConverter(articleConverter);
-    this.article$ = docData(this.articleRef, {
-      idField: 'id',
-    });
+    this.articlesFirebaseService
+      .getArticle$(this.articleId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((article) => {
+        this.article.set(article);
+        this.isLoading.set(false);
+      });
   }
 
   editArticle() {
@@ -78,12 +70,17 @@ export class ArticleDetailsPage {
 
   async deleteArticle() {
     try {
-      await deleteDoc(this.articleRef);
+      await this.articlesFirebaseService.deleteArticle(this.articleId);
       this.toastr.success('Article deleted');
       this.router.navigate(['../'], { relativeTo: this.route });
     } catch (error) {
       console.error(error);
       this.toastr.error(GENERAL_ERROR_MESSAGE);
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

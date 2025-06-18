@@ -1,8 +1,10 @@
-@if (article$ | async; as article) {
+@if (isLoading()) {
+<app-loading-page />
+} @else { @if (article(); as article) {
 <app-edit-article-form
   [article]="article"
   (submitClicked)="editArticle($event)"
 ></app-edit-article-form>
 } @else {
-<app-empty-page text="Article not found"></app-empty-page>
-}
+<app-empty-page text="Could not find this article" />
+} }

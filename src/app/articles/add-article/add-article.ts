@@ -4,12 +4,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { GENERAL_ERROR_MESSAGE } from '../../util/messages';
 import { Input } from '../../ui/forms/input/input';
 import { Textarea } from '../../ui/forms/textarea/textarea';
-import { addDoc, collection, Firestore } from '@angular/fire/firestore';
-import { articleConverter } from '../articles.converter';
 import { INewArticle } from '../articles.interface';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ROUTES_CONFIG } from '../../routes.config';
+import { ArticlesFirebaseService } from '../articles-firebase-service';
 
 @Component({
   selector: 'app-add-article',
@@ -19,7 +18,9 @@ import { ROUTES_CONFIG } from '../../routes.config';
 })
 export class AddArticle {
   private formBuilder: FormBuilder = inject(FormBuilder);
-  private firestore: Firestore = inject(Firestore);
+  private articlesFirebaseService: ArticlesFirebaseService = inject(
+    ArticlesFirebaseService
+  );
   private toastr: ToastrService = inject(ToastrService);
   private router: Router = inject(Router);
 
@@ -44,12 +45,8 @@ export class AddArticle {
   };
 
   async addArticle(payload: INewArticle) {
-    const articleRef = collection(this.firestore, 'articles').withConverter(
-      articleConverter
-    );
-
     try {
-      await addDoc(articleRef, payload);
+      await this.articlesFirebaseService.addArticle(payload);
       this.toastr.success('New article added');
       this.router.navigate(['/' + ROUTES_CONFIG.ARTICLES.path]);
     } catch (error) {

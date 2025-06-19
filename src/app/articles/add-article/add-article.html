@@ -1,26 +1,23 @@
 <form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="form-wrapper">
-  <app-input [control]="articleForm.controls['title']" name="title"></app-input>
+  <app-input [control]="articleForm.controls['title']" name="Title"></app-input>
 
   <app-textarea
     [control]="articleForm.controls['summary']"
     [minRows]="2"
-    name="summary"
+    name="Summary"
   ></app-textarea>
 
   <app-textarea
     [control]="articleForm.controls['content']"
     [minRows]="20"
-    name="content"
+    name="Content"
   ></app-textarea>
 
   <div class="actions">
-    <button
-      matButton="filled"
-      color="primary"
-      type="submit"
-      [disabled]="articleForm.invalid"
-    >
-      Add article
-    </button>
+    <app-spinner-button
+      text="Add article"
+      [disabled]="submitLoading()"
+      [isLoading]="submitLoading()"
+    ></app-spinner-button>
   </div>
 </form>

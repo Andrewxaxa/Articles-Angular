@@ -1,0 +1,11 @@
+<button
+  class="spinner-button"
+  matButton="filled"
+  [color]="color()"
+  [type]="type()"
+  [disabled]="disabled()"
+>
+  @if (isLoading()) {
+  <mat-spinner diameter="20" class="spinner"></mat-spinner>
+  } {{ text() }}
+</button>

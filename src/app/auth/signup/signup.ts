@@ -1,16 +1,16 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { Input } from '../../ui/forms/input/input';
 import { AuthService } from '../auth-service';
 import { ISignupPayload } from '../user.interface';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { GENERAL_ERROR_MESSAGE } from '../../util/messages';
+import { SpinnerButton } from '../../ui/spinner-button/spinner-button';
 
 @Component({
   selector: 'app-signup',
-  imports: [ReactiveFormsModule, MatButtonModule, Input],
+  imports: [ReactiveFormsModule, Input, SpinnerButton],
   templateUrl: './signup.html',
   styleUrl: './signup.scss',
 })
@@ -19,6 +19,7 @@ export class Signup {
   private authService = inject(AuthService);
   private toastr = inject(ToastrService);
   private router = inject(Router);
+  isLoading = signal(false);
 
   signupForm = this.formBuilder.group({
     username: ['', [Validators.required]],
@@ -27,15 +28,23 @@ export class Signup {
   });
 
   async onSubmit() {
+    if (!this.signupForm.valid) {
+      this.signupForm.markAllAsTouched();
+      return;
+    }
+
     const payload: ISignupPayload = this.signupForm.value as ISignupPayload;
 
     try {
+      this.isLoading.set(true);
       await this.authService.signup(payload);
       this.toastr.success('Signed up');
       this.router.navigate(['/']);
     } catch (error) {
       console.error(error);
       this.toastr.error(GENERAL_ERROR_MESSAGE);
+    } finally {
+      this.isLoading.set(false);
     }
   }
 }

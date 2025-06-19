@@ -7,14 +7,14 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { Textarea } from '../../ui/forms/textarea/textarea';
 import { Input } from '../../ui/forms/input/input';
 import { IArticle, IUpdateArticle } from '../articles.interface';
+import { SpinnerButton } from '../../ui/spinner-button/spinner-button';
 
 @Component({
   selector: 'app-edit-article-form',
-  imports: [ReactiveFormsModule, MatButtonModule, Input, Textarea],
+  imports: [ReactiveFormsModule, Input, Textarea, SpinnerButton],
   templateUrl: './edit-article-form.html',
   styleUrl: './edit-article-form.scss',
 })
@@ -22,6 +22,7 @@ export class EditArticleForm implements OnChanges {
   private formBuilder: FormBuilder = inject(FormBuilder);
 
   article = input.required<IArticle>();
+  isLoading = input.required<boolean>();
   submitClicked = output<IUpdateArticle>();
 
   articleForm = this.formBuilder.group({
@@ -42,6 +43,7 @@ export class EditArticleForm implements OnChanges {
 
   onSubmit() {
     if (!this.articleForm.valid) {
+      this.articleForm.markAllAsTouched();
       return;
     }
 

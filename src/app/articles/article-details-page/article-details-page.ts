@@ -70,12 +70,15 @@ export class ArticleDetailsPage implements OnDestroy {
 
   async deleteArticle() {
     try {
+      this.isLoading.set(true);
       await this.articlesFirebaseService.deleteArticle(this.articleId);
       this.toastr.success('Article deleted');
       this.router.navigate(['../'], { relativeTo: this.route });
     } catch (error) {
       console.error(error);
       this.toastr.error(GENERAL_ERROR_MESSAGE);
+    } finally {
+      this.isLoading.set(false);
     }
   }
 

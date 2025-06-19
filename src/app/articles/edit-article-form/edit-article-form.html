@@ -14,13 +14,10 @@
   ></app-textarea>
 
   <div class="actions">
-    <button
-      matButton="filled"
-      color="primary"
-      type="submit"
-      [disabled]="articleForm.invalid"
-    >
-      Edit article
-    </button>
+    <app-spinner-button
+      text="Edit article"
+      [disabled]="isLoading()"
+      [isLoading]="isLoading()"
+    ></app-spinner-button>
   </div>
 </form>

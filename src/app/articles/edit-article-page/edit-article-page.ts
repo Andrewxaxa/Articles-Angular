@@ -26,6 +26,7 @@ export class EditArticlePage implements OnDestroy {
   readonly article = signal<IArticle | undefined>(undefined);
   readonly articleId = this.route.snapshot.paramMap.get('id')!;
   isLoading = signal(true);
+  submitLoading = signal(false);
 
   constructor() {
     this.articlesFirebaseService
@@ -39,12 +40,15 @@ export class EditArticlePage implements OnDestroy {
 
   async editArticle(payload: IUpdateArticle) {
     try {
+      this.submitLoading.set(true);
       await this.articlesFirebaseService.editArticle(this.articleId, payload);
       this.toastr.success('Article edited');
       this.router.navigate(['../'], { relativeTo: this.route });
     } catch (error) {
       console.error(error);
       this.toastr.error(GENERAL_ERROR_MESSAGE);
+    } finally {
+      this.submitLoading.set(false);
     }
   }
 

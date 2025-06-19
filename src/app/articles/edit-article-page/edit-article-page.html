@@ -3,6 +3,7 @@
 } @else { @if (article(); as article) {
 <app-edit-article-form
   [article]="article"
+  [isLoading]="submitLoading()"
   (submitClicked)="editArticle($event)"
 ></app-edit-article-form>
 } @else {

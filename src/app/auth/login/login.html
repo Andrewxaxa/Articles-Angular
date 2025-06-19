@@ -11,13 +11,10 @@
   ></app-input>
 
   <div class="actions">
-    <button
-      matButton="filled"
-      color="primary"
-      type="submit"
-      [disabled]="loginForm.invalid"
-    >
-      Login
-    </button>
+    <app-spinner-button
+      text="Login"
+      [disabled]="isLoading()"
+      [isLoading]="isLoading()"
+    ></app-spinner-button>
   </div>
 </form>

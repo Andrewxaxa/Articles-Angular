@@ -6,9 +6,10 @@
     </mat-card-header>
 
     <img
+      class="article-image"
       mat-card-image
-      src="https://material.angular.dev/assets/img/examples/shiba2.jpg"
       alt="Article image"
+      [src]="article.cdnUrl"
     />
 
     <mat-card-content>

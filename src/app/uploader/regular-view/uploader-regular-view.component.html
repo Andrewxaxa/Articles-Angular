@@ -1,0 +1,40 @@
+<uc-config
+  ctx-name="my-uploader"
+  pubkey="3ce57f33e177b6443d1c"
+  source-list="local"
+  multiple="false"
+></uc-config>
+
+<div class="upload-button-container">
+  <uc-file-uploader-regular
+    ctx-name="my-uploader"
+    mult
+  ></uc-file-uploader-regular>
+</div>
+
+<uc-upload-ctx-provider
+  ctx-name="my-uploader"
+  #ctxProvider
+></uc-upload-ctx-provider>
+
+<div class="previews">
+  @for (file of files(); track file.cdnUrl) {
+  <div class="preview-wrapper">
+    <img
+      class="preview-image"
+      src="{{ file.cdnUrl + '/-/preview/-/resize/x400/' }}"
+      height="200"
+      width="200"
+      [alt]="file.fileInfo.originalFilename"
+      [title]="file.fileInfo.originalFilename"
+    />
+
+    <p class="preview-data">
+      {{ file.fileInfo.originalFilename }}
+    </p>
+    <p class="preview-data">
+      {{ formatSize(file.fileInfo.size) }}
+    </p>
+  </div>
+  }
+</div>

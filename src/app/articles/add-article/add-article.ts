@@ -9,10 +9,17 @@ import { Router } from '@angular/router';
 import { ROUTES_CONFIG } from '../../routes.config';
 import { ArticlesFirebaseService } from '../articles-firebase-service';
 import { SpinnerButton } from '../../ui/spinner-button/spinner-button';
+import { UploaderRegularViewComponent } from '../../uploader/regular-view/uploader-regular-view.component';
 
 @Component({
   selector: 'app-add-article',
-  imports: [ReactiveFormsModule, Input, Textarea, SpinnerButton],
+  imports: [
+    ReactiveFormsModule,
+    Input,
+    Textarea,
+    SpinnerButton,
+    UploaderRegularViewComponent,
+  ],
   templateUrl: './add-article.html',
   styleUrl: './add-article.scss',
 })
@@ -29,11 +36,25 @@ export class AddArticle {
     title: ['', [Validators.required, Validators.minLength(5)]],
     summary: ['', [Validators.required, Validators.minLength(5)]],
     content: ['', [Validators.required, Validators.minLength(10)]],
+    cdnUrl: [''],
   });
 
-  onSubmit = () => {
+  onFileUploaded(cdnUrl: string) {
+    this.articleForm.get('cdnUrl')?.setValue(cdnUrl);
+  }
+
+  onFileRemoved() {
+    this.articleForm.get('cdnUrl')?.setValue('');
+  }
+
+  onSubmit() {
     if (!this.articleForm.valid) {
       this.articleForm.markAllAsTouched();
+      return;
+    }
+
+    if (!this.articleForm.get('cdnUrl')?.value) {
+      this.toastr.warning('Please upload image for your article');
       return;
     }
 
@@ -44,7 +65,7 @@ export class AddArticle {
     } as INewArticle;
 
     this.addArticle(payload);
-  };
+  }
 
   async addArticle(payload: INewArticle) {
     try {

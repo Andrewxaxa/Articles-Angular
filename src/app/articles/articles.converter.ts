@@ -9,8 +9,9 @@ export const articleConverter: FirestoreDataConverter<IArticle> = {
   toFirestore(article: IArticle): DocumentData {
     return {
       title: article.title,
-      content: article.content,
       summary: article.summary,
+      content: article.content,
+      cdnUrl: article.cdnUrl,
       createdAt:
         article.createdAt instanceof Date
           ? Timestamp.fromDate(article.createdAt)
@@ -26,8 +27,9 @@ export const articleConverter: FirestoreDataConverter<IArticle> = {
     return {
       id: snapshot.id,
       title: data['title'],
-      content: data['content'],
       summary: data['summary'],
+      content: data['content'],
+      cdnUrl: data['cdnUrl'],
       createdAt: data['createdAt'].toDate(),
       updatedAt: data['updatedAt'].toDate(),
     };

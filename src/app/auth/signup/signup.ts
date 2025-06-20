@@ -41,8 +41,11 @@ export class Signup {
       this.toastr.success('Signed up');
       this.router.navigate(['/']);
     } catch (error) {
-      console.error(error);
-      this.toastr.error(GENERAL_ERROR_MESSAGE);
+      if (error instanceof Error) {
+        this.toastr.error(error.message);
+      } else {
+        this.toastr.error(GENERAL_ERROR_MESSAGE);
+      }
     } finally {
       this.isLoading.set(false);
     }

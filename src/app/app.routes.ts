@@ -4,6 +4,8 @@ import { ArticlesPage } from './articles/articles-page/articles-page';
 import { NotFound } from './not-found/not-found';
 import { ROUTES_CONFIG } from './routes.config';
 import { Login } from './auth/login/login';
+import { authGuard } from './auth/guards/auth-guard';
+import { guestGuard } from './auth/guards/guest-guard';
 
 export const routes: Routes = [
   {
@@ -15,17 +17,20 @@ export const routes: Routes = [
     path: ROUTES_CONFIG.LOGIN.path,
     component: Login,
     title: ROUTES_CONFIG.LOGIN.title,
+    canActivate: [guestGuard],
   },
   {
     path: ROUTES_CONFIG.SIGNUP.path,
     loadComponent: () => import('./auth/signup/signup').then((m) => m.Signup),
     title: ROUTES_CONFIG.SIGNUP.title,
+    canActivate: [guestGuard],
   },
   {
     path: ROUTES_CONFIG.ADD_ARTICLE.path,
     loadComponent: () =>
       import('./articles/add-article/add-article').then((m) => m.AddArticle),
     title: ROUTES_CONFIG.ADD_ARTICLE.title,
+    canActivate: [authGuard],
   },
   {
     path: ROUTES_CONFIG.ARTICLES_DETAILS.path,
@@ -42,6 +47,7 @@ export const routes: Routes = [
         (m) => m.EditArticlePage
       ),
     title: ROUTES_CONFIG.EDIT_ARTICLE.title,
+    canActivate: [authGuard],
   },
   {
     path: ROUTES_CONFIG.ARTICLES.path,

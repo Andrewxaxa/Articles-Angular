@@ -13,6 +13,7 @@ import {
 } from '../../ui/confirm-dialog/confirm-dialog';
 import { ArticlesFirebaseService } from '../articles-firebase-service';
 import { LoadingPage } from '../../ui/loading-page/loading-page';
+import { AuthService } from '../../auth/auth-service';
 
 @Component({
   selector: 'app-article-details-page',
@@ -24,6 +25,7 @@ export class ArticleDetailsPage implements OnDestroy {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private articlesFirebaseService = inject(ArticlesFirebaseService);
+  private authService = inject(AuthService);
   private toastr = inject(ToastrService);
   private dialog = inject(MatDialog);
   private destroy$ = new Subject<void>();
@@ -41,11 +43,38 @@ export class ArticleDetailsPage implements OnDestroy {
       });
   }
 
+  get user() {
+    return this.authService.user();
+  }
+
   editArticle() {
     this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
   onDelete() {
+    const data: ConfirmDialogData = {
+      title: 'Delete article',
+      content: 'Do you want to delete this article?',
+    };
+
+    const dialogRef = this.dialog.open<
+      ConfirmDialog,
+      ConfirmDialogData,
+      boolean
+    >(ConfirmDialog, {
+      data,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) {
+        return;
+      }
+
+      this.deleteArticle();
+    });
+  }
+
+  openConfirmModal() {
     const data: ConfirmDialogData = {
       title: 'Delete article',
       content: 'Do you want to delete this article?',

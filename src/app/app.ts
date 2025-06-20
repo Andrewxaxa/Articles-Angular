@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Navbar } from './navbar/navbar';
 import { AuthService } from './auth/auth-service';
 import { IUser } from './auth/user.interface';
@@ -13,6 +13,8 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class App implements OnDestroy {
   private authService = inject(AuthService);
+  private router = inject(Router);
+
   private destroy$ = new Subject<void>();
   protected title = 'articles-angular';
   user: IUser | null | undefined;
@@ -37,6 +39,8 @@ export class App implements OnDestroy {
 
   async logout() {
     this.authService.logout();
+    this.authService.user.set(null);
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy() {

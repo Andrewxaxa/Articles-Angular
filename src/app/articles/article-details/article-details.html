@@ -21,6 +21,7 @@
       <div class="content" [innerHTML]="article().content"></div>
     </mat-card-content>
 
+    @if (user()) {
     <mat-card-actions align="end">
       <button
         mat-icon-button
@@ -40,5 +41,6 @@
       </button>
       <span class="spacer"></span>
     </mat-card-actions>
+    }
   </mat-card>
 </div>

@@ -21,7 +21,8 @@ import { IArticle, INewArticle, IUpdateArticle } from './articles.interface';
   providedIn: 'root',
 })
 export class ArticlesFirebaseService {
-  private firestore: Firestore = inject(Firestore);
+  private firestore = inject(Firestore);
+
   private articlesCollection = collection(
     this.firestore,
     'articles'

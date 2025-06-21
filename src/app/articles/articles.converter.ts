@@ -12,6 +12,7 @@ export const articleConverter: FirestoreDataConverter<IArticle> = {
       title: article.title,
       summary: article.summary,
       content: article.content,
+      category: article.category,
       cdnUrl: article.cdnUrl,
       createdAt:
         article.createdAt instanceof Date
@@ -25,12 +26,14 @@ export const articleConverter: FirestoreDataConverter<IArticle> = {
   },
   fromFirestore(snapshot, options): IArticle {
     const data = snapshot.data(options);
+
     return {
       id: snapshot.id,
       userId: data['userId'],
       title: data['title'],
       summary: data['summary'],
       content: data['content'],
+      category: data['category'],
       cdnUrl: data['cdnUrl'],
       createdAt: data['createdAt'].toDate(),
       updatedAt: data['updatedAt'].toDate(),

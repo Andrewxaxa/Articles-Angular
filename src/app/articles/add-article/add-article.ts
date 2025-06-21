@@ -11,13 +11,19 @@ import { ArticlesFirebaseService } from '../articles-firebase-service';
 import { SpinnerButton } from '../../ui/spinner-button/spinner-button';
 import { UploaderRegularViewComponent } from '../../uploader/regular-view/uploader-regular-view.component';
 import { AuthService } from '../../auth/auth-service';
+import { CategoriesFirebaseService } from '../categories-firebase-service';
+import { map, Observable } from 'rxjs';
+import { ISelectOption, Select } from '../../ui/forms/select/select';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-article',
   imports: [
     ReactiveFormsModule,
+    AsyncPipe,
     Input,
     Textarea,
+    Select,
     SpinnerButton,
     UploaderRegularViewComponent,
   ],
@@ -25,19 +31,29 @@ import { AuthService } from '../../auth/auth-service';
   styleUrl: './add-article.scss',
 })
 export class AddArticle {
-  private formBuilder: FormBuilder = inject(FormBuilder);
-  private articlesFirebaseService: ArticlesFirebaseService = inject(
-    ArticlesFirebaseService
-  );
+  private formBuilder = inject(FormBuilder);
+  private articlesFirebaseService = inject(ArticlesFirebaseService);
+  private categoriesFirebaseService = inject(CategoriesFirebaseService);
   private toastr = inject(ToastrService);
   private router = inject(Router);
   private authService = inject(AuthService);
   submitLoading = signal(false);
+  categories$ = this.categoriesFirebaseService.getCategories$();
+  selectOptions$: Observable<ISelectOption[]> = this.categories$.pipe(
+    map((categories) =>
+      categories.map((category) => ({
+        key: category.id,
+        label: category.name,
+        value: category.name,
+      }))
+    )
+  );
 
   articleForm = this.formBuilder.group({
     title: ['', [Validators.required, Validators.minLength(5)]],
     summary: ['', [Validators.required, Validators.minLength(5)]],
     content: ['', [Validators.required, Validators.minLength(10)]],
+    category: ['', [Validators.required]],
     cdnUrl: [''],
   });
 

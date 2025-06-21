@@ -1,0 +1,11 @@
+<mat-form-field class="form-field">
+  <mat-label>{{ name() }}</mat-label>
+  <mat-select [formControl]="control()">
+    @for(option of options(); track option.key) {
+    <mat-option [value]="option.value"> {{ option.label }} </mat-option>
+    }
+  </mat-select>
+  @if (control().hasError('required')) {
+  <mat-error>{{requiredMessage(name())}}</mat-error>
+  }
+</mat-form-field>

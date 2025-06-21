@@ -4,6 +4,7 @@ export interface IArticle {
   title: string;
   summary: string;
   content: string;
+  category: string;
   cdnUrl: string;
   createdAt: Date;
   updatedAt: Date;

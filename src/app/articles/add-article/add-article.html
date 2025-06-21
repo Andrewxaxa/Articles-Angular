@@ -6,6 +6,12 @@
 ></uploader-regular-view>
 
 <form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="form-wrapper">
+  <app-select
+    [control]="articleForm.controls['category']"
+    [options]="(selectOptions$ | async) || []"
+    name="Category"
+  ></app-select>
+
   <app-input [control]="articleForm.controls['title']" name="Title"></app-input>
 
   <app-textarea

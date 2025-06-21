@@ -1,5 +1,13 @@
+<div class="search-field-container">
+  <app-search-field
+    class="search-field"
+    label="Search articles"
+    (inputChanged)="onInputChanged($event)"
+  ></app-search-field>
+</div>
+
 <div class="articles-grid">
-  @for (article of articles(); track article.id) {
+  @for (article of filteredArticles(); track article.id) {
   <mat-card class="article-card" appearance="outlined">
     <mat-card-header>
       <mat-card-title>{{ article.title }}</mat-card-title>

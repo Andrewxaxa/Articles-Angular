@@ -1,0 +1,10 @@
+<mat-form-field appearance="outline">
+  <mat-icon matPrefix>search</mat-icon>
+  <mat-label>{{ label() }}</mat-label>
+  <input
+    matInput
+    [(ngModel)]="search"
+    (ngModelChange)="onSearchChange($event)"
+  />
+  <mat-icon class="clear-icon" matSuffix (click)="onClear()">close</mat-icon>
+</mat-form-field>

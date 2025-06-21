@@ -59,10 +59,10 @@ export class AddArticle {
       return;
     }
 
-    // if (!this.articleForm.get('cdnUrl')?.value) {
-    //   this.toastr.warning('Please upload image for your article');
-    //   return;
-    // }
+    if (!this.articleForm.get('cdnUrl')?.value) {
+      this.toastr.warning('Please upload image for your article');
+      return;
+    }
 
     const payload = {
       ...this.articleForm.value,

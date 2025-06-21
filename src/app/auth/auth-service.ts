@@ -41,4 +41,8 @@ export class AuthService {
   logout(): Promise<void> {
     return signOut(this.firebaseAuth);
   }
+
+  isCreator(userId: string): boolean {
+    return this.user()?.uid === userId;
+  }
 }

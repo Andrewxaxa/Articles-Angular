@@ -10,6 +10,7 @@ import { ROUTES_CONFIG } from '../../routes.config';
 import { ArticlesFirebaseService } from '../articles-firebase-service';
 import { SpinnerButton } from '../../ui/spinner-button/spinner-button';
 import { UploaderRegularViewComponent } from '../../uploader/regular-view/uploader-regular-view.component';
+import { AuthService } from '../../auth/auth-service';
 
 @Component({
   selector: 'app-add-article',
@@ -30,6 +31,7 @@ export class AddArticle {
   );
   private toastr = inject(ToastrService);
   private router = inject(Router);
+  private authService = inject(AuthService);
   submitLoading = signal(false);
 
   articleForm = this.formBuilder.group({
@@ -38,6 +40,10 @@ export class AddArticle {
     content: ['', [Validators.required, Validators.minLength(10)]],
     cdnUrl: [''],
   });
+
+  get user() {
+    return this.authService.user;
+  }
 
   onFileUploaded(cdnUrl: string) {
     this.articleForm.get('cdnUrl')?.setValue(cdnUrl);
@@ -53,13 +59,14 @@ export class AddArticle {
       return;
     }
 
-    if (!this.articleForm.get('cdnUrl')?.value) {
-      this.toastr.warning('Please upload image for your article');
-      return;
-    }
+    // if (!this.articleForm.get('cdnUrl')?.value) {
+    //   this.toastr.warning('Please upload image for your article');
+    //   return;
+    // }
 
     const payload = {
       ...this.articleForm.value,
+      userId: this.user()!.uid,
       createdAt: new Date(),
       updatedAt: new Date(),
     } as INewArticle;

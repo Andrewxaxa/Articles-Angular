@@ -26,6 +26,7 @@ export class App implements OnDestroy {
         this.authService.user.set({
           username: user.displayName!,
           email: user.email!,
+          uid: user.uid!,
         });
       } else {
         this.authService.user.set(null);

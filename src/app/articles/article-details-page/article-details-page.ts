@@ -31,6 +31,7 @@ export class ArticleDetailsPage implements OnDestroy {
   private destroy$ = new Subject<void>();
   readonly article = signal<IArticle | undefined>(undefined);
   readonly articleId = this.route.snapshot.paramMap.get('id')!;
+  isCreator = signal(false);
   isLoading = signal(true);
 
   constructor() {
@@ -38,13 +39,15 @@ export class ArticleDetailsPage implements OnDestroy {
       .getArticle$(this.articleId)
       .pipe(takeUntil(this.destroy$))
       .subscribe((article) => {
+        if (!article?.id) {
+          this.isLoading.set(false);
+          return;
+        }
+
         this.article.set(article);
+        this.isCreator.set(this.authService.isCreator(article.userId));
         this.isLoading.set(false);
       });
-  }
-
-  get user() {
-    return this.authService.user();
   }
 
   editArticle() {

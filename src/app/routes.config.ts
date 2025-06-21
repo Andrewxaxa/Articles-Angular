@@ -6,6 +6,7 @@ interface IRoutesConfig {
   ARTICLES_DETAILS: IRouteConfig;
   ADD_ARTICLE: IRouteConfig;
   EDIT_ARTICLE: IRouteConfig;
+  MY_ARTICLES: IRouteConfig;
 }
 
 interface IRouteConfig {
@@ -49,5 +50,10 @@ export const ROUTES_CONFIG: IRoutesConfig = {
     name: 'Add article',
     path: 'articles/new',
     title: 'Add article',
+  },
+  MY_ARTICLES: {
+    name: 'My articles',
+    path: 'my-articles',
+    title: 'My articles',
   },
 };

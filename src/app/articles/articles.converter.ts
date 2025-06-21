@@ -8,6 +8,7 @@ import { IArticle } from './articles.interface';
 export const articleConverter: FirestoreDataConverter<IArticle> = {
   toFirestore(article: IArticle): DocumentData {
     return {
+      userId: article.userId,
       title: article.title,
       summary: article.summary,
       content: article.content,
@@ -26,6 +27,7 @@ export const articleConverter: FirestoreDataConverter<IArticle> = {
     const data = snapshot.data(options);
     return {
       id: snapshot.id,
+      userId: data['userId'],
       title: data['title'],
       summary: data['summary'],
       content: data['content'],

@@ -38,6 +38,10 @@ export class Navbar {
       name: ROUTES_CONFIG.ADD_ARTICLE.name,
       path: ROUTES_CONFIG.ADD_ARTICLE.path,
     },
+    {
+      name: ROUTES_CONFIG.MY_ARTICLES.name,
+      path: ROUTES_CONFIG.MY_ARTICLES.path,
+    },
   ];
   routesConfig = ROUTES_CONFIG;
 }

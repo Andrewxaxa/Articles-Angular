@@ -54,5 +54,14 @@ export const routes: Routes = [
     component: ArticlesPage,
     title: ROUTES_CONFIG.ARTICLES.title,
   },
+  {
+    path: ROUTES_CONFIG.MY_ARTICLES.path,
+    loadComponent: () =>
+      import('./articles/my-articles-page/my-articles-page').then(
+        (m) => m.MyArticlesPage
+      ),
+    title: ROUTES_CONFIG.MY_ARTICLES.title,
+    canActivate: [authGuard],
+  },
   { path: '**', component: NotFound },
 ];

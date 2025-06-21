@@ -17,7 +17,7 @@
       <div class="content" [innerHTML]="article().content"></div>
     </mat-card-content>
 
-    @if (user()) {
+    @if (isCreator()) {
     <mat-card-actions align="end">
       <button
         mat-icon-button

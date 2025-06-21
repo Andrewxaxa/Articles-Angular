@@ -3,7 +3,7 @@
 } @else { @if (article(); as article) {
 <app-article-details
   [article]="article"
-  [user]="user"
+  [isCreator]="isCreator()"
   (articleEditClicked)="editArticle()"
   (articleDeleteClicked)="onDelete()"
 ></app-article-details>

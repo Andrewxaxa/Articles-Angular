@@ -9,7 +9,9 @@ import {
   DocumentData,
   DocumentReference,
   Firestore,
+  query,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
 import { articleConverter } from './articles.converter';
 import { Observable } from 'rxjs';
@@ -37,6 +39,15 @@ export class ArticlesFirebaseService {
     return collectionData(this.articlesCollection, {
       idField: 'id',
     });
+  }
+
+  getUserArticles$(userId: string): Observable<IArticle[]> {
+    const userArticlesQuery = query(
+      this.articlesCollection,
+      where('userId', '==', userId)
+    );
+
+    return collectionData(userArticlesQuery, { idField: 'id' });
   }
 
   getArticle$(articleId: string): Observable<IArticle | undefined> {

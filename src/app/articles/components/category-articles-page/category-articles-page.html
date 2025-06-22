@@ -1,0 +1,17 @@
+<button
+  matButton="filled"
+  color="primary"
+  class="back-button"
+  (click)="onBackClicked()"
+>
+  <mat-icon>arrow_back</mat-icon>
+  Browse categories
+</button>
+
+@if (isLoading()) {
+<app-loading-page />
+} @else if (filteredArticles().length > 0) {
+<app-articles-list [articles]="filteredArticles()"></app-articles-list>
+} @else {
+<app-empty-page text="No articles in this category" />
+}

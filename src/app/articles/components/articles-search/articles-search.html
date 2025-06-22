@@ -1,0 +1,9 @@
+<div class="search-field-container">
+  <app-search-field
+    class="search-field"
+    label="Search articles"
+    (inputChanged)="onInputChanged($event)"
+  ></app-search-field>
+</div>
+
+<app-articles-list [articles]="filteredArticles()"></app-articles-list>

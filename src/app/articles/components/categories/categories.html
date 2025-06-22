@@ -1,0 +1,7 @@
+@if (isLoading()) {
+<app-loading-page />
+} @else { @if (categories().length) {
+<app-category-cards [categories]="categories()"></app-category-cards>
+} @else {
+<app-empty-page text="Could not find this article" />
+} }

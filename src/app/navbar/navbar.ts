@@ -42,6 +42,10 @@ export class Navbar {
       name: ROUTES_CONFIG.MY_ARTICLES.name,
       path: ROUTES_CONFIG.MY_ARTICLES.path,
     },
+    {
+      name: ROUTES_CONFIG.CAGORIES.name,
+      path: ROUTES_CONFIG.CAGORIES.path,
+    },
   ];
   routesConfig = ROUTES_CONFIG;
 }

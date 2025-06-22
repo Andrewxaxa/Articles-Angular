@@ -1,0 +1,8 @@
+<div class="category-cards">
+  @for (category of categories(); track category.id) {
+  <mat-card class="category-card" (click)="goToCategory(category.name)">
+    <img mat-card-image [src]="category.cdnUrl" [alt]="category.name" />
+    <mat-card-title>{{ category.name }}</mat-card-title>
+  </mat-card>
+  }
+</div>

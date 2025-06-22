@@ -31,9 +31,7 @@ export class CategoryArticlesPage {
 
   filteredArticles = linkedSignal(() => {
     return this.articles().filter(
-      (article) =>
-        article.category.toLocaleLowerCase() ===
-        this.categoryName!.toLocaleLowerCase()
+      (article) => article.category === this.categoryName!
     );
   });
   isLoading = signal(true);

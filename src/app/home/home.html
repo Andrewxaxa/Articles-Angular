@@ -1,5 +1,76 @@
-@if (user) {
-<h1 class="welcome-text">Welcome {{ user.username }}!</h1>
-}
+<div class="home-container">
+  <div class="hero-section">
+    <img
+      src="https://ucarecdn.com/db3aca88-0233-4e66-9b98-a85463c35d7b/-/preview/866x650/"
+      alt="ArticlesAngular Logo"
+      class="logo"
+    />
+    <h1>
+      @if (user) { Welcome, <span class="username">{{ user.username }}</span>! }
+      @else { Welcome to <span class="brand">ArticlesAngular</span>! }
+    </h1>
+    <p class="subtitle">
+      A modern platform for publishing and discovering articles.
+    </p>
+  </div>
 
-<p>home works!</p>
+  <div class="card about">
+    <h2>About the app</h2>
+    <p>
+      <strong>ArticlesAngular</strong> is a place where you can share knowledge,
+      inspire others, and develop your passions. Create, edit, and browse
+      articles in a friendly, intuitive interface.
+    </p>
+    <a
+      matButton
+      href="https://github.com/Andrewxaxa/Articles-Angular"
+      target="_blank"
+      class="link-icon"
+    >
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+        alt="GitHub"
+        width="24"
+        height="24"
+      />
+      <span class="link-name">GitHub</span>
+    </a>
+  </div>
+
+  <div class="card features">
+    <h2>Features</h2>
+    <ul>
+      <li>User registration and login</li>
+      <li>Add, edit, and delete articles</li>
+      <li>Search and filter content</li>
+      <li>Add images to articles</li>
+      <li>Responsive, modern interface</li>
+      <li>Action notifications</li>
+      <li>Route protection and error handling</li>
+    </ul>
+  </div>
+
+  <div class="card tech">
+    <h2>Technologies used</h2>
+    <div class="tech-list">
+      <span>Angular</span>
+      <span>Angular Material</span>
+      <span>Firebase</span>
+      <span>AngularFire</span>
+      <span>Uploadcare</span>
+      <span>SCSS</span>
+      <span>TypeScript</span>
+      <span>Signals</span>
+      <span>RxJS</span>
+    </div>
+  </div>
+
+  <div class="card start">
+    <h2>How to start?</h2>
+    <ol>
+      <li>Register or log in.</li>
+      <li>Add and browse articles.</li>
+      <li>Discover new content and develop your interests!</li>
+    </ol>
+  </div>
+</div>

@@ -1,59 +1,84 @@
-# ArticlesAngular
+# Articles Angular Project
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
+A modern Angular application for managing and viewing articles, with Firebase integration for authentication and data storage.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- User authentication (login, signup, guards)
+- Article management (add, edit, view, search, list, categories)
+- Category management
+- Firebase backend integration
+- Responsive UI with reusable components
+- Error handling and loading states
 
-```bash
-ng serve
+## Project Structure
+
+```
+src/
+  app/
+    articles/           # Article features (components, services, interfaces)
+    auth/               # Authentication (services, guards, login, signup)
+    home/               # Home page
+    navbar/             # Navigation bar
+    not-found/          # 404 page
+    ui/                 # UI components (dialogs, forms, loading, search, spinner)
+    uploader/           # File uploader
+    util/               # Utility files (messages, helpers)
+  index.html
+  main.ts
+  styles.scss
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Getting Started
 
-## Code scaffolding
+### Prerequisites
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Node.js (v16+ recommended)
+- npm
+- Angular CLI (`npm install -g @angular/cli`)
 
-```bash
-ng generate component component-name
-```
+### Installation
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+1. Clone the repository:
+   ```bash
+   git clone <repo-url>
+   cd Articles-Angular
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Configure Firebase:
+   - Update `firebase.config.ts` with your Firebase project settings.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Running the App
 
 ```bash
-ng test
+npm start
 ```
 
-## Running end-to-end tests
+The app will be available at `http://localhost:4200/`.
 
-For end-to-end (e2e) testing, run:
+### Running Tests
 
 ```bash
-ng e2e
+npm test
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Firebase Setup
 
-## Additional Resources
+- Make sure to set up your Firebase project and update the configuration files (`firebase.config.ts`, `firebase.json`, etc.).
+- Firestore rules and indexes are provided in the root directory.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Project Scripts
+
+- `npm start` — Run the development server
+- `npm test` — Run unit tests
+
+## Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+[MIT](LICENSE)

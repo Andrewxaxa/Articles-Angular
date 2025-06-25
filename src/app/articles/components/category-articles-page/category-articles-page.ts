@@ -1,8 +1,15 @@
-import { Component, inject, linkedSignal, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  linkedSignal,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { ArticlesFirebaseService } from '../../services/articles-firebase-service';
 import { Subject, takeUntil } from 'rxjs';
 import { IArticle } from '../../interfaces/articles.interface';
-import { EmptyPage } from '../../../ui/empty-page/empty-page-page';
+import { EmptyPage } from '../../../ui/empty-page/empty-page';
 import { LoadingPage } from '../../../ui/loading-page/loading-page';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArticlesList } from '../articles-list/articles-list';
@@ -21,7 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './category-articles-page.html',
   styleUrl: './category-articles-page.scss',
 })
-export class CategoryArticlesPage {
+export class CategoryArticlesPage implements OnInit, OnDestroy {
   private articlesFirebaseService = inject(ArticlesFirebaseService);
   private destroy$ = new Subject<void>();
   private route = inject(ActivatedRoute);
@@ -36,7 +43,7 @@ export class CategoryArticlesPage {
   });
   isLoading = signal(true);
 
-  constructor() {
+  ngOnInit(): void {
     this.articlesFirebaseService
       .getArticles$()
       .pipe(takeUntil(this.destroy$))

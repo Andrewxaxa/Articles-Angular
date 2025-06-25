@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { Navbar } from './navbar/navbar';
 import { AuthService } from './auth/auth-service';
@@ -11,7 +11,7 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
-export class App implements OnDestroy {
+export class App implements OnInit, OnDestroy {
   private authService = inject(AuthService);
   private router = inject(Router);
 
@@ -20,7 +20,7 @@ export class App implements OnDestroy {
   user: IUser | null | undefined;
   userDataLoading = signal(true);
 
-  constructor() {
+  ngOnInit(): void {
     this.authService.user$.pipe(takeUntil(this.destroy$)).subscribe((user) => {
       if (user) {
         this.authService.user.set({

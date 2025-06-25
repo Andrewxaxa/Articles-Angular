@@ -1,9 +1,9 @@
-import { Component, inject, OnDestroy, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { EditArticleForm } from '../edit-article-form/edit-article-form';
-import { EmptyPage } from '../../../ui/empty-page/empty-page-page';
+import { EmptyPage } from '../../../ui/empty-page/empty-page';
 import { LoadingPage } from '../../../ui/loading-page/loading-page';
 import { ArticlesFirebaseService } from '../../services/articles-firebase-service';
 import { IArticle, IUpdateArticle } from '../../interfaces/articles.interface';
@@ -15,7 +15,7 @@ import { GENERAL_ERROR_MESSAGE } from '../../../util/messages';
   templateUrl: './edit-article-page.html',
   styleUrl: './edit-article-page.scss',
 })
-export class EditArticlePage implements OnDestroy {
+export class EditArticlePage implements OnInit, OnDestroy {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
   private articlesFirebaseService: ArticlesFirebaseService = inject(
@@ -29,13 +29,19 @@ export class EditArticlePage implements OnDestroy {
   isLoading = signal(true);
   submitLoading = signal(false);
 
-  constructor() {
+  ngOnInit(): void {
     this.articlesFirebaseService
       .getArticle$(this.articleId)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((article) => {
-        this.article.set(article);
-        this.isLoading.set(false);
+      .subscribe({
+        next: (article) => {
+          this.article.set(article);
+          this.isLoading.set(false);
+        },
+        error: () => {
+          this.article.set(undefined);
+          this.isLoading.set(false);
+        },
       });
   }
 

@@ -1,5 +1,5 @@
-import { Component, inject, OnDestroy, signal } from '@angular/core';
-import { EmptyPage } from '../../../ui/empty-page/empty-page-page';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { EmptyPage } from '../../../ui/empty-page/empty-page';
 import { LoadingPage } from '../../../ui/loading-page/loading-page';
 import { Subject, takeUntil } from 'rxjs';
 import { IArticle } from '../../interfaces/articles.interface';
@@ -12,14 +12,14 @@ import { ArticlesSearch } from '../articles-search/articles-search';
   templateUrl: './articles-page.html',
   styleUrl: './articles-page.scss',
 })
-export class ArticlesPage implements OnDestroy {
+export class ArticlesPage implements OnInit, OnDestroy {
   private articlesFirebaseService = inject(ArticlesFirebaseService);
   private destroy$ = new Subject<void>();
   readonly articles = signal<IArticle[]>([]);
 
   isLoading = signal(true);
 
-  constructor() {
+  ngOnInit(): void {
     this.articlesFirebaseService
       .getArticles$()
       .pipe(takeUntil(this.destroy$))

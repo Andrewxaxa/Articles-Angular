@@ -1,7 +1,11 @@
 import { Component, input } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { REQUIRED_MESSAGE, TOO_SHORT_MESSAGE } from '../../../util/messages';
+import {
+  EMAIL_INVALID_MESSAGE,
+  REQUIRED_MESSAGE,
+  TOO_SHORT_MESSAGE,
+} from '../../../util/messages';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -17,4 +21,5 @@ export class Input {
 
   requiredMessage = (field: string): string => REQUIRED_MESSAGE(field);
   tooShortMessage = (field: string): string => TOO_SHORT_MESSAGE(field);
+  emailInvalidMessage = EMAIL_INVALID_MESSAGE;
 }

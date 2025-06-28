@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { homePage } from './home.selectors';
-import { loginTestUser, logout, testUser } from '../auth/auth.helper';
+import { loginTestUser, testUser } from '../auth/auth.helper';
 
 test.describe('Home Page', () => {
   let home: ReturnType<typeof homePage>;
@@ -76,7 +76,5 @@ test.describe('Home Page', () => {
 
     await expect(page.getByTestId('home-header')).toContainText('Welcome,');
     await expect(page.getByTestId('username')).toHaveText(testUser.username);
-
-    await logout(page);
   });
 });

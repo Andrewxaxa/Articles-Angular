@@ -7,7 +7,7 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getAuth, provideAuth } from '@angular/fire/auth';
+import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
 import {
   connectFirestoreEmulator,
   getFirestore,
@@ -24,7 +24,13 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideAuth(() => getAuth()),
+    provideAuth(() => {
+      const auth = getAuth();
+      if (environment.useFirestoreEmulator) {
+        connectAuthEmulator(auth, 'http://localhost:9099');
+      }
+      return auth;
+    }),
     provideFirestore(() => {
       const firestore = getFirestore();
       if (environment.useFirestoreEmulator) {

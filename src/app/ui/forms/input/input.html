@@ -5,5 +5,7 @@
   <mat-error>{{requiredMessage(name())}}</mat-error>
   } @if (control().hasError('minlength')) {
   <mat-error>{{tooShortMessage(name())}}</mat-error>
+  } @if (control().hasError('email')) {
+  <mat-error>{{emailInvalidMessage}}</mat-error>
   }
 </mat-form-field>

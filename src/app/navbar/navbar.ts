@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { IUser } from '../auth/user.interface';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NoSpacesPipe } from '../util/no-spaces-pipe';
 
 interface INavRoute {
   name: string;
@@ -20,6 +21,7 @@ interface INavRoute {
     MatIconModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    NoSpacesPipe,
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',

@@ -1,23 +1,27 @@
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form-wrapper">
   <app-input
-    [control]="signupForm.controls['username']"
     name="username"
     type="email"
+    data-testid="username"
+    [control]="signupForm.controls['username']"
   ></app-input>
   <app-input
-    [control]="signupForm.controls['email']"
     name="email"
     type="email"
+    data-testid="email"
+    [control]="signupForm.controls['email']"
   ></app-input>
   <app-input
-    [control]="signupForm.controls['password']"
     name="password"
     type="password"
+    data-testid="password"
+    [control]="signupForm.controls['password']"
   ></app-input>
 
   <div class="actions">
     <app-spinner-button
       text="Signup"
+      data-testid="signup-button"
       [disabled]="isLoading()"
       [isLoading]="isLoading()"
     ></app-spinner-button>

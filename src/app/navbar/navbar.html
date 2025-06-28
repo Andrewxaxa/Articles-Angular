@@ -18,8 +18,8 @@
   <a
     class="header-item"
     matButton="tonal"
-    [routerLink]="route.path"
     routerLinkActive="active"
+    [routerLink]="route.path"
     [routerLinkActiveOptions]="{exact: true}"
     >{{ route.name }}</a
   >
@@ -30,9 +30,10 @@
   @if(!userDataLoading()) { @if (user()) {
   <button
     mat-icon-button
-    (click)="logoutClicked.emit()"
     aria-label="Log out"
     matTooltip="Log out"
+    data-testid="logout"
+    (click)="logoutClicked.emit()"
   >
     <mat-icon class="delete-icon">logout</mat-icon>
   </button>
@@ -40,8 +41,8 @@
   <a
     class="action-button"
     matButton="outlined"
-    [routerLink]="routesConfig.LOGIN.path"
     routerLinkActive="active"
+    [routerLink]="routesConfig.LOGIN.path"
     [routerLinkActiveOptions]="{exact: true}"
   >
     <mat-icon
@@ -55,8 +56,8 @@
   <a
     class="action-button"
     matButton="outlined"
-    [routerLink]="routesConfig.SIGNUP.path"
     routerLinkActive="active"
+    [routerLink]="routesConfig.SIGNUP.path"
     [routerLinkActiveOptions]="{exact: true}"
   >
     <mat-icon

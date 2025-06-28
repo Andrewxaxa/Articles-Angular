@@ -1,18 +1,21 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-wrapper">
   <app-input
-    [control]="loginForm.controls['email']"
     name="email"
     type="email"
+    data-testid="email"
+    [control]="loginForm.controls['email']"
   ></app-input>
   <app-input
-    [control]="loginForm.controls['password']"
     name="password"
     type="password"
+    data-testid="password"
+    [control]="loginForm.controls['password']"
   ></app-input>
 
   <div class="actions">
     <app-spinner-button
       text="Login"
+      data-testid="login-button"
       [disabled]="isLoading()"
       [isLoading]="isLoading()"
     ></app-spinner-button>

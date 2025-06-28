@@ -1,76 +1,82 @@
 <div class="home-container">
   <div class="hero-section">
     <img
-      src="https://ucarecdn.com/db3aca88-0233-4e66-9b98-a85463c35d7b/-/preview/866x650/"
-      alt="ArticlesAngular Logo"
       class="logo"
+      data-testid="logo"
+      alt="ArticlesAngular Logo"
+      src="https://ucarecdn.com/db3aca88-0233-4e66-9b98-a85463c35d7b/-/preview/866x650/"
     />
-    <h1>
-      @if (user) { Welcome, <span class="username">{{ user.username }}</span>! }
-      @else { Welcome to <span class="brand">ArticlesAngular</span>! }
+    <h1 data-testid="home-header">
+      @if (user) { Welcome,
+      <span class="username" data-testid="username">{{ user.username }}</span>!
+      } @else { Welcome to <span class="brand">ArticlesAngular</span>! }
     </h1>
-    <p class="subtitle">
+    <p class="subtitle" data-testid="subtitle">
       A modern platform for publishing and discovering articles.
     </p>
   </div>
 
-  <div class="card about">
-    <h2>About the app</h2>
-    <p>
+  <div class="card about" data-testid="about-card">
+    <h2 data-testid="about-title">About the app</h2>
+    <p data-testid="about-description">
       <strong>ArticlesAngular</strong> is a place where you can share knowledge,
       inspire others, and develop your passions. Create, edit, and browse
       articles in a friendly, intuitive interface.
     </p>
     <a
       matButton
-      href="https://github.com/Andrewxaxa/Articles-Angular"
       target="_blank"
       class="link-icon"
+      data-testid="github-link"
+      href="https://github.com/Andrewxaxa/Articles-Angular"
     >
       <img
-        src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
-        alt="GitHub"
         width="24"
         height="24"
+        alt="GitHub"
+        src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
       />
       <span class="link-name">GitHub</span>
     </a>
   </div>
 
-  <div class="card features">
-    <h2>Features</h2>
-    <ul>
-      <li>User registration and login</li>
-      <li>Add, edit, and delete articles</li>
-      <li>Search and filter content</li>
-      <li>Add images to articles</li>
-      <li>Responsive, modern interface</li>
-      <li>Action notifications</li>
-      <li>Route protection and error handling</li>
+  <div class="card features" data-testid="feature-items">
+    <h2 data-testid="features-title">Features</h2>
+    <ul data-testid="features-list">
+      <li data-testid="feature-item">User registration and login</li>
+      <li data-testid="feature-item">Add, edit, and delete articles</li>
+      <li data-testid="feature-item">Search and filter content</li>
+      <li data-testid="feature-item">Add images to articles</li>
+      <li data-testid="feature-item">Responsive, modern interface</li>
+      <li data-testid="feature-item">Action notifications</li>
+      <li data-testid="feature-item">Route protection and error handling</li>
     </ul>
   </div>
 
-  <div class="card tech">
-    <h2>Technologies used</h2>
-    <div class="tech-list">
-      <span>Angular</span>
-      <span>Angular Material</span>
-      <span>Firebase</span>
-      <span>AngularFire</span>
-      <span>Uploadcare</span>
-      <span>SCSS</span>
-      <span>TypeScript</span>
-      <span>Signals</span>
-      <span>RxJS</span>
+  <div class="card tech" data-testid="tech-card">
+    <h2 data-testid="tech-title">Technologies used</h2>
+    <div class="tech-list" data-testid="tech-list">
+      <span data-testid="tech-item">Angular</span>
+      <span data-testid="tech-item">Angular Material</span>
+      <span data-testid="tech-item">Firebase</span>
+      <span data-testid="tech-item">AngularFire</span>
+      <span data-testid="tech-item">Uploadcare</span>
+      <span data-testid="tech-item">SCSS</span>
+      <span data-testid="tech-item">TypeScript</span>
+      <span data-testid="tech-item">Signals</span>
+      <span data-testid="tech-item">RxJS</span>
+      <span data-testid="tech-item">Playwright</span>
     </div>
   </div>
 
-  <div class="card start">
-    <h2>How to start?</h2>
-    <ol>
-      <li>Register or log in.</li>
-      <li>Add and browse articles.</li>
-      <li>Discover new content and develop your interests!</li>
+  <div class="card start" data-testid="start-card">
+    <h2 data-testid="start-title">How to start?</h2>
+    <ol data-testid="start-list">
+      <li data-testid="start-step">Register or log in.</li>
+      <li data-testid="start-step">Add and browse articles.</li>
+      <li data-testid="start-step">
+        Discover new content and develop your interests!
+      </li>
     </ol>
   </div>
 </div>

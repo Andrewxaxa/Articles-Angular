@@ -1,8 +1,13 @@
 <div class="not-found-container">
-  <mat-icon class="icon">error</mat-icon>
-  <h1>404</h1>
-  <p>Page not found</p>
-  <button mat-raised-button color="primary" routerLink="/">
+  <mat-icon class="icon" data-testid="icon">error</mat-icon>
+  <h1 data-testid="header">404</h1>
+  <p data-testid="text">Page not found</p>
+  <button
+    mat-raised-button
+    color="primary"
+    routerLink="/"
+    data-testid="back-button"
+  >
     Back to home page
   </button>
 </div>

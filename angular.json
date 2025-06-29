@@ -53,11 +53,11 @@
               "extractLicenses": false,
               "sourceMap": true
             },
-            "e2e": {
+            "test": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.e2e.ts"
+                  "with": "src/environments/environment.test.ts"
                 }
               ],
               "optimization": false,
@@ -78,8 +78,8 @@
             "development": {
               "buildTarget": "articles-angular:build:development"
             },
-            "e2e": {
-              "buildTarget": "articles-angular:build:e2e"
+            "test": {
+              "buildTarget": "articles-angular:build:test"
             }
           },
           "defaultConfiguration": "development"

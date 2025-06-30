@@ -19,7 +19,7 @@ test.describe('Signup Page', () => {
   let signup: ReturnType<typeof signupPage>;
 
   test.beforeEach(async ({ page }) => {
-    page.goto('/signup');
+    await page.goto('/signup');
     signup = signupPage(page);
   });
 

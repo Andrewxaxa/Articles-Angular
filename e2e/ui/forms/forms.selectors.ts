@@ -1,4 +1,4 @@
-import { Page } from 'playwright/test';
+import { Page } from '@playwright/test';
 
 export const formFieldError = (page: Page, testId: string) =>
   page.getByTestId(testId).locator('mat-error');

@@ -1,4 +1,4 @@
-import { Page } from 'playwright/test';
+import { Page } from '@playwright/test';
 
 export const loginPage = (page: Page) => ({
   email: () => page.getByTestId('email').locator('input'),

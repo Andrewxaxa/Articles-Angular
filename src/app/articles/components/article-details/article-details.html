@@ -1,37 +1,48 @@
 <div class="article-container">
   <mat-card class="article-card">
     <mat-card-header>
-      <mat-card-title>{{ article().title }}</mat-card-title>
-      <mat-card-subtitle>
+      <mat-card-title data-testid="title">{{ article().title }}</mat-card-title>
+      <mat-card-subtitle data-testid="created-at">
         Created at: {{ article().createdAt | date:'short' }}
       </mat-card-subtitle>
-      <mat-card-subtitle>
+      <mat-card-subtitle data-testid="updated-at">
         Last update: {{ article().updatedAt | date:'short' }}
       </mat-card-subtitle>
     </mat-card-header>
 
-    <img mat-card-image alt="Article Image" [src]="article().cdnUrl" />
+    <img
+      mat-card-image
+      alt="Article Image"
+      data-testid="image"
+      [src]="article().cdnUrl"
+    />
 
     <mat-card-content>
-      <p class="summary">{{ article().summary }}</p>
-      <div class="content" [innerHTML]="article().content"></div>
+      <p class="summary" data-testid="summary">{{ article().summary }}</p>
+      <div
+        class="content"
+        data-testid="content"
+        [innerHTML]="article().content"
+      ></div>
     </mat-card-content>
 
     @if (isCreator()) {
-    <mat-card-actions align="end">
+    <mat-card-actions align="end" data-testid="logged-in-actions">
       <button
         mat-icon-button
-        (click)="articleEditClicked.emit()"
         aria-label="Edit article"
         matTooltip="Edit article"
+        data-testid="edit-button"
+        (click)="articleEditClicked.emit()"
       >
         <mat-icon class="edit-icon">edit</mat-icon>
       </button>
       <button
         mat-icon-button
-        (click)="articleDeleteClicked.emit()"
         aria-label="Delete article"
         matTooltip="Delete article"
+        data-testid="delete-button"
+        (click)="articleDeleteClicked.emit()"
       >
         <mat-icon class="delete-icon">delete</mat-icon>
       </button>

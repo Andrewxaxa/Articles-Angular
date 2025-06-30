@@ -1,4 +1,6 @@
-import { Page } from 'playwright/test';
+import { expect } from '@playwright/test';
+import { Page } from '@playwright/test';
+import { addArticlePage } from './add-article.selectors';
 
 export const newArticleFormData = {
   category: 'Technology',
@@ -73,3 +75,27 @@ export const interceptUploadcateInfoRequest = (page: Page): Promise<void> =>
       body: JSON.stringify(uploadcareInfoResponse),
     });
   });
+
+export const addArticle = async (page: Page): Promise<void> => {
+  const addArticle = addArticlePage(page);
+
+  await interceptUploadcareBaseQequest(page);
+  await interceptUploadcateInfoRequest(page);
+
+  const fileChooserPromise = page.waitForEvent('filechooser');
+  await addArticle.uploadFileButton().click();
+  const fileChooser = await fileChooserPromise;
+  await fileChooser.setFiles('e2e/assets/test-image.jpg');
+  await addArticle.uploadDoneButton().click();
+
+  await addArticle.category().click();
+  const categoryOption = await addArticle.categoryOption();
+  await expect(categoryOption).toBeVisible();
+  await categoryOption.click();
+
+  await addArticle.title().fill(newArticleFormData.title);
+  await addArticle.summary().fill(newArticleFormData.summary);
+  await addArticle.content().fill(newArticleFormData.content);
+
+  await addArticle.submitButton().click();
+};

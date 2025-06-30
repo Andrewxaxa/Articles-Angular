@@ -1,4 +1,4 @@
-import { Page } from 'playwright/test';
+import { Page } from '@playwright/test';
 
 export const homePage = (page: Page) => ({
   header: () => page.getByTestId('home-header'),

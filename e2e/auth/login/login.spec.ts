@@ -12,7 +12,7 @@ test.describe('Login Page', () => {
   let login: ReturnType<typeof loginPage>;
 
   test.beforeEach(async ({ page }) => {
-    page.goto('/login');
+    await page.goto('/login');
     login = loginPage(page);
   });
 

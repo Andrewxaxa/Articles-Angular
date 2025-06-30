@@ -11,13 +11,14 @@ import {
   interceptUploadcateInfoRequest,
   newArticleFormData,
 } from './add-article.helper';
+import { deleteArticle } from '../article-details/article-details.helper';
 
 test.describe('Add Article Page', () => {
   let addArticle: ReturnType<typeof addArticlePage>;
 
   test.beforeEach(async ({ page }) => {
     await loginTestUser(page);
-    page.goto('/articles/new');
+    await page.goto('/articles/new');
     addArticle = addArticlePage(page);
   });
 
@@ -55,10 +56,7 @@ test.describe('Add Article Page', () => {
     await expect(toastSuccess(page)).toBeVisible();
     await expect(toastSuccess(page)).toContainText('New article added');
 
-    const titleLocator = page
-      .getByTestId('title')
-      .filter({ hasText: newArticleFormData.title });
-    await expect(titleLocator).toBeVisible();
+    await deleteArticle(page, newArticleFormData.title);
   });
 
   test('should not submit and show error toast if image is not attached', async ({

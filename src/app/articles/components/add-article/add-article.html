@@ -1,34 +1,48 @@
-<p class="file-picker-header">Article image:</p>
+<p class="file-picker-header" data-testid="picker-header">Article image:</p>
 
 <uploader-regular-view
+  data-testid="uploader"
   (fileUploaded)="onFileUploaded($event)"
   (fileRemoved)="onFileRemoved()"
 ></uploader-regular-view>
 
-<form [formGroup]="articleForm" (ngSubmit)="onSubmit()" class="form-wrapper">
+<form
+  [formGroup]="articleForm"
+  (ngSubmit)="onSubmit()"
+  class="form-wrapper"
+  data-testid="form"
+>
   <app-select
+    name="Category"
+    data-testid="category"
     [control]="articleForm.controls['category']"
     [options]="(selectOptions$ | async) || []"
-    name="Category"
   ></app-select>
 
-  <app-input [control]="articleForm.controls['title']" name="Title"></app-input>
+  <app-input
+    name="Title"
+    data-testid="title"
+    [control]="articleForm.controls['title']"
+  ></app-input>
 
   <app-textarea
+    name="Summary"
+    data-testid="summary"
     [control]="articleForm.controls['summary']"
     [minRows]="2"
-    name="Summary"
   ></app-textarea>
 
   <app-textarea
+    name="Content"
+    data-testid="content"
     [control]="articleForm.controls['content']"
     [minRows]="20"
-    name="Content"
   ></app-textarea>
 
   <div class="actions">
     <app-spinner-button
       text="Add article"
+      data-testid="submit-button"
       [disabled]="submitLoading()"
       [isLoading]="submitLoading()"
     ></app-spinner-button>

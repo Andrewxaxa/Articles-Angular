@@ -2,7 +2,7 @@
   @for (article of articles(); track article.id) {
   <mat-card class="article-card" appearance="outlined">
     <mat-card-header>
-      <mat-card-title>{{ article.title }}</mat-card-title>
+      <mat-card-title data-testid="title">{{ article.title }}</mat-card-title>
     </mat-card-header>
 
     <img

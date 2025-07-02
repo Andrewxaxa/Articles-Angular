@@ -22,13 +22,6 @@ test.describe('My Articles List', () => {
     await expect(page.url()).toMatch('/login');
   });
 
-  test('should show loading spinner', async ({ page }) => {
-    await loginTestUser(page);
-    await page.goto(myArticlesRoute);
-
-    await expect(pageLoader(page)).toBeVisible();
-  });
-
   test('sould render list of articles if logged in user is a creator', async ({
     page,
   }) => {

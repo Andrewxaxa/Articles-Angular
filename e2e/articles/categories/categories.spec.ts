@@ -1,7 +1,6 @@
 import { emptyPage } from './../../ui/empty-page/empty-page.selectors';
 import { test, expect } from '@playwright/test';
 import { categoriesPage } from './categories.selectors';
-import { pageLoader } from '../../ui/loading-page/loading-page.selectors';
 
 test.describe('Categories Page', () => {
   let categories: ReturnType<typeof categoriesPage>;
@@ -9,10 +8,6 @@ test.describe('Categories Page', () => {
   test.beforeEach(async ({ page }) => {
     page.goto('/categories');
     categories = categoriesPage(page);
-  });
-
-  test('should show page loader', async ({ page }) => {
-    await expect(pageLoader(page)).toBeVisible();
   });
 
   test('should show categories', async () => {

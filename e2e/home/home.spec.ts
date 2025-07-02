@@ -74,7 +74,7 @@ test.describe('Home Page', () => {
   }) => {
     await loginTestUser(page);
 
-    await expect(page.getByTestId('home-header')).toContainText('Welcome,');
-    await expect(page.getByTestId('username')).toHaveText(testUser.username);
+    await expect(home.header()).toContainText('Welcome,');
+    await expect(home.username()).toHaveText(testUser.username);
   });
 });

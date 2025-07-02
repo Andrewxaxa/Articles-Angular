@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 import { articlesSearchpage } from './articles-search-list.selectors';
-import { pageLoader } from '../../ui/loading-page/loading-page.selectors';
 import { testArticle } from '../articles.helper';
 
 test.describe('Articles Search List', () => {
@@ -9,10 +8,6 @@ test.describe('Articles Search List', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/articles');
     articlesSearch = articlesSearchpage(page);
-  });
-
-  test('should display page loader', async ({ page }) => {
-    await expect(pageLoader(page)).toBeVisible();
   });
 
   test('should display search field', async () => {

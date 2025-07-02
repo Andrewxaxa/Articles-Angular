@@ -1,25 +1,31 @@
-<div class="articles-grid">
+<div class="articles-grid" data-testid="articles-grid">
   @for (article of articles(); track article.id) {
-  <mat-card class="article-card" appearance="outlined">
+  <mat-card
+    class="article-card"
+    appearance="outlined"
+    data-testid="article-card"
+  >
     <mat-card-header>
       <mat-card-title data-testid="title">{{ article.title }}</mat-card-title>
     </mat-card-header>
 
     <img
       class="article-image"
-      mat-card-image
       alt="Article image"
+      data-testid="image"
+      mat-card-image
       [src]="article.cdnUrl"
     />
 
     <mat-card-content>
-      <p class="summary">{{ article.summary }}</p>
+      <p class="summary" data-testid="summary">{{ article.summary }}</p>
     </mat-card-content>
 
     <mat-card-actions>
       <button
         mat-button
         color="primary"
+        data-testid="read-more-button"
         [routerLink]="['/articles', article.id]"
       >
         Read more

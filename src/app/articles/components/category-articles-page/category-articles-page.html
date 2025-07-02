@@ -2,13 +2,14 @@
   matButton="filled"
   color="primary"
   class="back-button"
+  data-testid="back-button"
   (click)="onBackClicked()"
 >
   <mat-icon>arrow_back</mat-icon>
   Browse categories
 </button>
 
-<h3 class="articles-category-title">
+<h3 class="articles-category-title" data-testid="articles-category-title">
   Articles in category: <span>{{ categoryName }}</span>
 </h3>
 

@@ -5,12 +5,12 @@ import {
   loginTestUser,
 } from './../../auth/auth.helper';
 import { articleDetailsPage } from './article-details.selectors';
-import { testArticle } from './article-details.helper';
 import { pageLoader } from '../../ui/loading-page/loading-page.selectors';
 import {
   addArticle,
   newArticleFormData,
 } from '../add-article/add-article.helper';
+import { testArticle } from '../articles.helper';
 
 test.describe('Article Details Page', () => {
   let articleDetails: ReturnType<typeof articleDetailsPage>;

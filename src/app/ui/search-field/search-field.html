@@ -7,6 +7,8 @@
     (ngModelChange)="onSearchChange($event)"
   />
   @if (search) {
-  <mat-icon class="clear-icon" matSuffix (click)="onClear()">close</mat-icon>
+  <mat-icon class="clear-icon" matSuffix data-testid="clear" (click)="onClear()"
+    >close</mat-icon
+  >
   }
 </mat-form-field>

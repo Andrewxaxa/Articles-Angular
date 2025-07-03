@@ -1,6 +1,5 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
 import { IArticle } from '../../interfaces/articles.interface';
 import { EmptyPage } from '../../../ui/empty-page/empty-page';
 import { ArticleDetails } from '../article-details/article-details';
@@ -14,6 +13,7 @@ import {
 import { LoadingPage } from '../../../ui/loading-page/loading-page';
 import { AuthService } from '../../../auth/auth-service';
 import { ArticlesFirebaseService } from '../../services/articles-firebase-service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-article-details-page',
@@ -21,15 +21,15 @@ import { ArticlesFirebaseService } from '../../services/articles-firebase-servic
   templateUrl: './article-details-page.html',
   styleUrl: './article-details-page.scss',
 })
-export class ArticleDetailsPage implements OnInit, OnDestroy {
+export class ArticleDetailsPage implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private articlesFirebaseService = inject(ArticlesFirebaseService);
   private authService = inject(AuthService);
   private toastr = inject(ToastrService);
   private dialog = inject(MatDialog);
+  private destroyRef = inject(DestroyRef);
 
-  private destroy$ = new Subject<void>();
   readonly article = signal<IArticle | undefined>(undefined);
   readonly articleId = this.route.snapshot.paramMap.get('id')!;
   isCreator = signal(false);
@@ -38,7 +38,7 @@ export class ArticleDetailsPage implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.articlesFirebaseService
       .getArticle$(this.articleId)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (article) => {
           if (!article?.id) {
@@ -99,10 +99,5 @@ export class ArticleDetailsPage implements OnInit, OnDestroy {
     } finally {
       this.isLoading.set(false);
     }
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

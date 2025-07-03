@@ -1,10 +1,10 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { CategoriesFirebaseService } from '../../services/categories-firebase-service';
 import { CategoryCards } from '../category-cards/category-cards';
-import { Subject, takeUntil } from 'rxjs';
 import { ICategory } from '../../interfaces/categories.interface';
 import { EmptyPage } from '../../../ui/empty-page/empty-page';
 import { LoadingPage } from '../../../ui/loading-page/loading-page';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-categories',
@@ -12,9 +12,9 @@ import { LoadingPage } from '../../../ui/loading-page/loading-page';
   templateUrl: './categories.html',
   styleUrl: './categories.scss',
 })
-export class CategoriesPage implements OnInit, OnDestroy {
+export class CategoriesPage implements OnInit {
   private categoriesFirebaseService = inject(CategoriesFirebaseService);
-  private destroy$ = new Subject<void>();
+  private destroyRef = inject(DestroyRef);
 
   categories = signal<ICategory[]>([]);
   isLoading = signal(true);
@@ -22,7 +22,7 @@ export class CategoriesPage implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.categoriesFirebaseService
       .getCategories$()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (categories) => {
           this.categories.set(categories);
@@ -33,10 +33,5 @@ export class CategoriesPage implements OnInit, OnDestroy {
           this.isLoading.set(false);
         },
       });
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

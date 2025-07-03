@@ -1,13 +1,13 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
 import { EditArticleForm } from '../edit-article-form/edit-article-form';
 import { EmptyPage } from '../../../ui/empty-page/empty-page';
 import { LoadingPage } from '../../../ui/loading-page/loading-page';
 import { ArticlesFirebaseService } from '../../services/articles-firebase-service';
 import { IArticle, IUpdateArticle } from '../../interfaces/articles.interface';
 import { GENERAL_ERROR_MESSAGE } from '../../../util/messages';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-edit-article-page',
@@ -15,14 +15,14 @@ import { GENERAL_ERROR_MESSAGE } from '../../../util/messages';
   templateUrl: './edit-article-page.html',
   styleUrl: './edit-article-page.scss',
 })
-export class EditArticlePage implements OnInit, OnDestroy {
+export class EditArticlePage implements OnInit {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private router: Router = inject(Router);
   private articlesFirebaseService: ArticlesFirebaseService = inject(
     ArticlesFirebaseService
   );
   private toastr: ToastrService = inject(ToastrService);
-  private destroy$ = new Subject<void>();
+  private destroyRef = inject(DestroyRef);
   readonly article = signal<IArticle | undefined>(undefined);
   readonly articleId = this.route.snapshot.paramMap.get('id')!;
 
@@ -32,7 +32,7 @@ export class EditArticlePage implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.articlesFirebaseService
       .getArticle$(this.articleId)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (article) => {
           this.article.set(article);
@@ -57,10 +57,5 @@ export class EditArticlePage implements OnInit, OnDestroy {
     } finally {
       this.submitLoading.set(false);
     }
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

@@ -1,10 +1,10 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { EmptyPage } from '../../../ui/empty-page/empty-page';
 import { LoadingPage } from '../../../ui/loading-page/loading-page';
-import { Subject, takeUntil } from 'rxjs';
 import { IArticle } from '../../interfaces/articles.interface';
 import { ArticlesFirebaseService } from '../../services/articles-firebase-service';
 import { ArticlesSearch } from '../articles-search/articles-search';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-articles',
@@ -12,9 +12,9 @@ import { ArticlesSearch } from '../articles-search/articles-search';
   templateUrl: './articles-page.html',
   styleUrl: './articles-page.scss',
 })
-export class ArticlesPage implements OnInit, OnDestroy {
+export class ArticlesPage implements OnInit {
   private articlesFirebaseService = inject(ArticlesFirebaseService);
-  private destroy$ = new Subject<void>();
+  private destroyRef = inject(DestroyRef);
   readonly articles = signal<IArticle[]>([]);
 
   isLoading = signal(true);
@@ -22,7 +22,7 @@ export class ArticlesPage implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.articlesFirebaseService
       .getArticles$()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (articles) => {
           this.articles.set(articles);
@@ -33,10 +33,5 @@ export class ArticlesPage implements OnInit, OnDestroy {
           this.isLoading.set(false);
         },
       });
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

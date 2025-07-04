@@ -15,22 +15,18 @@ import { articleMock } from '../../../util/mocks/articles-mock';
 import { EditArticleForm } from '../edit-article-form/edit-article-form';
 import { EmptyPage } from '../../../ui/empty-page/empty-page';
 import { IUpdateArticle } from '../../interfaces/articles.interface';
+import { ComponentRef } from '@angular/core';
 
 describe('EditArticle', () => {
   let component: EditArticlePage;
   let fixture: ComponentFixture<EditArticlePage>;
+  let componentRef: ComponentRef<EditArticlePage>;
 
   let mockArticleService: jasmine.SpyObj<ArticlesFirebaseService>;
   let mockToastr: jasmine.SpyObj<ToastrService>;
   let mockRouter: jasmine.SpyObj<Router>;
 
-  const activatedRouteValue = {
-    snapshot: {
-      paramMap: {
-        get: () => 'article1',
-      },
-    },
-  } as any;
+  const activatedRouteValue = {} as any;
 
   beforeEach(async () => {
     mockArticleService = jasmine.createSpyObj('ArticlesFirebaseService', [
@@ -52,6 +48,8 @@ describe('EditArticle', () => {
 
     fixture = TestBed.createComponent(EditArticlePage);
     component = fixture.componentInstance;
+    componentRef = fixture.componentRef;
+    componentRef.setInput('id', 'article1');
   });
 
   it('should render loading page initially', () => {

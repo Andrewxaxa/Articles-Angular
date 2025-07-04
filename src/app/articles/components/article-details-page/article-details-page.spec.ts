@@ -14,10 +14,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { provideHttpClient } from '@angular/common/http';
 import { articleMock } from '../../../util/mocks/articles-mock';
 import { GENERAL_ERROR_MESSAGE } from '../../../util/messages';
+import { ComponentRef } from '@angular/core';
 
 describe('ArticleDetailsPage', () => {
   let component: ArticleDetailsPage;
   let fixture: ComponentFixture<ArticleDetailsPage>;
+  let componentRef: ComponentRef<ArticleDetailsPage>;
 
   let articlesFirebaseServiceMock: jasmine.SpyObj<ArticlesFirebaseService>;
   let authServiceMock: jasmine.SpyObj<AuthService>;
@@ -25,13 +27,7 @@ describe('ArticleDetailsPage', () => {
   let routerMock: jasmine.SpyObj<Router>;
   let dialogMock: jasmine.SpyObj<MatDialog>;
 
-  const mockRoute = {
-    snapshot: {
-      paramMap: {
-        get: () => 'article1',
-      },
-    },
-  };
+  const mockRoute = {};
 
   beforeEach(async () => {
     articlesFirebaseServiceMock = jasmine.createSpyObj(
@@ -70,6 +66,8 @@ describe('ArticleDetailsPage', () => {
 
     fixture = TestBed.createComponent(ArticleDetailsPage);
     component = fixture.componentInstance;
+    componentRef = fixture.componentRef;
+    componentRef.setInput('id', 'article1');
   });
 
   afterEach(() => {

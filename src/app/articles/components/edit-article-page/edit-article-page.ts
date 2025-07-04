@@ -1,4 +1,11 @@
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  input,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EditArticleForm } from '../edit-article-form/edit-article-form';
@@ -23,15 +30,16 @@ export class EditArticlePage implements OnInit {
   );
   private toastr: ToastrService = inject(ToastrService);
   private destroyRef = inject(DestroyRef);
+
+  readonly id = input('');
   readonly article = signal<IArticle | undefined>(undefined);
-  readonly articleId = this.route.snapshot.paramMap.get('id')!;
 
   isLoading = signal(true);
   submitLoading = signal(false);
 
   ngOnInit(): void {
     this.articlesFirebaseService
-      .getArticle$(this.articleId)
+      .getArticle$(this.id())
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (article) => {
@@ -48,7 +56,7 @@ export class EditArticlePage implements OnInit {
   async editArticle(payload: IUpdateArticle) {
     try {
       this.submitLoading.set(true);
-      await this.articlesFirebaseService.editArticle(this.articleId, payload);
+      await this.articlesFirebaseService.editArticle(this.id(), payload);
       this.toastr.success('Article edited');
       this.router.navigate(['../'], { relativeTo: this.route });
     } catch (error) {

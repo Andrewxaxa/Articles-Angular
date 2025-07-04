@@ -60,7 +60,7 @@ export const ROUTES_CONFIG: IRoutesConfig = {
   },
   CATEGORY_ARTICLES: {
     name: 'Category articles',
-    path: 'categories/:name',
+    path: 'categories/:categoryName',
     title: 'Category articles',
   },
   CAGORIES: {

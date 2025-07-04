@@ -64,12 +64,10 @@ export class UploaderRegularViewComponent {
   };
 
   handleDoneFlow = (e: UC.EventMap['file-upload-success']) => {
-    console.log('done', e.detail.cdnUrl);
     this.fileUploaded.emit(e.detail.cdnUrl);
   };
 
   handleFileRemoved = (e: UC.EventMap['file-removed']) => {
-    console.log('removed', e);
     this.fileRemoved.emit();
   };
 

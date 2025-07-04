@@ -1,4 +1,11 @@
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  input,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IArticle } from '../../interfaces/articles.interface';
 import { EmptyPage } from '../../../ui/empty-page/empty-page';
@@ -30,14 +37,14 @@ export class ArticleDetailsPage implements OnInit {
   private dialog = inject(MatDialog);
   private destroyRef = inject(DestroyRef);
 
+  readonly id = input('');
   readonly article = signal<IArticle | undefined>(undefined);
-  readonly articleId = this.route.snapshot.paramMap.get('id')!;
   isCreator = signal(false);
   isLoading = signal(true);
 
   ngOnInit(): void {
     this.articlesFirebaseService
-      .getArticle$(this.articleId)
+      .getArticle$(this.id())
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (article) => {
@@ -90,7 +97,7 @@ export class ArticleDetailsPage implements OnInit {
   async deleteArticle() {
     try {
       this.isLoading.set(true);
-      await this.articlesFirebaseService.deleteArticle(this.articleId);
+      await this.articlesFirebaseService.deleteArticle(this.id());
       this.toastr.success('Article deleted');
       this.router.navigate(['../'], { relativeTo: this.route });
     } catch (error) {

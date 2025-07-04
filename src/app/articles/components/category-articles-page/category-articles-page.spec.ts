@@ -13,22 +13,18 @@ import { LoadingPage } from '../../../ui/loading-page/loading-page';
 import { articlesMock } from '../../../util/mocks/articles-mock';
 import { ArticlesList } from '../articles-list/articles-list';
 import { EmptyPage } from '../../../ui/empty-page/empty-page';
+import { ComponentRef } from '@angular/core';
 
 describe('CategoryArticlesPage', () => {
   let component: CategoryArticlesPage;
   let fixture: ComponentFixture<CategoryArticlesPage>;
+  let componentRef: ComponentRef<CategoryArticlesPage>;
 
   let routerMock: jasmine.SpyObj<Router>;
   let articlesServiceMock: jasmine.SpyObj<ArticlesFirebaseService>;
-  const categoryNameFromRoute = 'Technology';
+  const categoryName = 'Technology';
 
-  const mockRoute = {
-    snapshot: {
-      paramMap: {
-        get: () => categoryNameFromRoute,
-      },
-    },
-  };
+  const mockRoute = {};
 
   beforeEach(async () => {
     routerMock = jasmine.createSpyObj('Router', ['navigate']);
@@ -47,6 +43,8 @@ describe('CategoryArticlesPage', () => {
 
     fixture = TestBed.createComponent(CategoryArticlesPage);
     component = fixture.componentInstance;
+    componentRef = fixture.componentRef;
+    componentRef.setInput('categoryName', categoryName);
   });
 
   it('should show loading page initially', () => {
@@ -62,7 +60,7 @@ describe('CategoryArticlesPage', () => {
   it('should render filtered articles list with available', fakeAsync(() => {
     const articles = [
       ...articlesMock,
-      { ...articlesMock[0], category: categoryNameFromRoute },
+      { ...articlesMock[0], category: categoryName },
     ];
     articlesServiceMock.getArticles$.and.returnValue(of(articles));
 

@@ -2,6 +2,7 @@ import {
   Component,
   DestroyRef,
   inject,
+  input,
   linkedSignal,
   OnInit,
   signal,
@@ -33,12 +34,13 @@ export class CategoryArticlesPage implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
-  readonly categoryName = this.route.snapshot.paramMap.get('name');
+
+  readonly categoryName = input('');
   readonly articles = signal<IArticle[]>([]);
 
   filteredArticles = linkedSignal(() => {
     return this.articles().filter(
-      (article) => article.category === this.categoryName!
+      (article) => article.category === this.categoryName()!
     );
   });
   isLoading = signal(true);
